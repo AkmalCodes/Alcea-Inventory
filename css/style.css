@@ -7,12 +7,12 @@
     font-size: 13px;
 }
 
+
 body {
     font-family: "Comfortaa", sans-serif;
     width: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-flow: column;
+    overflow-x: hidden;
+
     height: 100%;
 }
 
@@ -120,25 +120,6 @@ li{
     padding: 0.5em 0;
 }
 
-.mobile-menu {
-    display: block;
-    position: absolute;
-    width: 100%;
-    z-index: 10000;
-}
-
-.back-btn{
-    border: none;
-    background-color: transparent;
-}
-
-.submenu-title{
-    padding-top: 0.3em;
-    margin:0;
-    margin-left:2em;
-    text-transform: uppercase;
-}
-
 /* Below are screen settings for menu css */
 
 @media screen and (max-width: 768px) {
@@ -158,16 +139,31 @@ li{
 }
 
 /* Below are mobile menu css */
-.mobile-menu{
-    
+.mobile-menu {
+    display: block;
+    position: absolute;
+    width: 100%;
+    z-index: 10000;
+    /* overflow-x: hidden; */
+}
+
+.back-btn{
+    border: none;
+    background-color: transparent;
+}
+
+.submenu-title{
+    padding-top: 0.3em;
+    margin:0;
+    margin-left:2em;
+    text-transform: uppercase;
 }
 
 .mobile-menu-list {
     background-color: rgb(253, 253, 253);
-    padding:0;
+    padding:1em 0;
     list-style-type: none;
     display: grid;
-    justify-content: space-around;
     align-items: center;
     flex-direction: column;
     width: 100%;
@@ -196,18 +192,19 @@ li{
 .mobile-submenu{
     display: grid;
     background-color: rgb(253, 253, 253);
-    padding:1em 2em;
+    padding:2em;
     position: absolute;
     list-style-type: none;
     width: 100%;
     min-height: 100%;
-    right: -120% !important;
-    top:0% !important;
-    border-radius: 6px;
+    right: 300% !important;
+    top: 0%!important;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
     z-index: 5;
     box-shadow:0px 1.5px 1px 1px rgba(7, 92, 62, 0.3);
     grid-template-columns: repeat(2, 1fr);
-    transition: right 0.3s ease;
+    transition: right 0.4s ease;
 }
 
 .mobile-submenu.show {
