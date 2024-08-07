@@ -1,0 +1,10 @@
+/* bootstrap override */
+
+.navbar-toggler:focus{
+    box-shadow: none;
+}
+
+.navbar-toggler:hover{
+    box-shadow: -1px -1px 1px 0.5px rgba(7, 92, 62, 0.3) 
+                ,inset -1px -1px 1px 0.5px rgba(7, 92, 62, 0.3);
+}

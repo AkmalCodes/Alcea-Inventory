@@ -37,18 +37,18 @@ footer{
 
 .top-nav-wrapper {
     position: relative;
-    background-color: rgb(202, 229, 238);
+    background-color: rgb(253, 253, 253);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1em;
     position: sticky;
     top: 0;
-    border: 0.5px solid lightblue;
+    box-shadow: inset 0px -1.5px 0px 0px rgba(7, 92, 62, 0.3);
 }
 
-.bottom-nav-wrapper{
-    /* border: 0.5px solid lightblue; */
+.bottom-nav-wrapper a:hover{
+    color:rgba(7, 92, 62);
 }
 
 /* Below are Desktop menu css */
@@ -60,7 +60,7 @@ footer{
     align-items: center;
     width: 100%;
     height: 5vh;
-    background-color: rgb(202, 229, 238);
+    background-color: rgb(253, 253, 253);
 }
 
 .desktop-menu>ul {
@@ -84,6 +84,9 @@ footer{
     text-decoration: none;
     color: inherit;
 }
+.desktop-menu>ul>li a {
+    color:rgb(7, 92, 62);
+}
 
 .desktop-dropdown-menu>ul{
     background-color: rgb(202, 229, 238);
@@ -93,22 +96,20 @@ footer{
     list-style-type: none;
     position: absolute;
     height: fit-content;
-    top: -10%;
+    top: -100%;
     z-index: -5;
     /* Add opacity for smooth transition */
-    transition: top 0.4s ease, opacity 0.5s ease;
+    transition: top 0.3s ease, opacity 0.5s ease;
     /* Smooth transition */
 }
 
-.desktop-dropdown-menu ul.show {
+.desktop-dropdown-menu>ul.show {
     top: 10.5%;
 }
-
 
 .desktop-dropdown-menu ul li {
     padding: 0.5em 0;
 }
-
 
 .mobile-menu {
     display: block;
@@ -153,7 +154,7 @@ footer{
 }
 
 .mobile-menu-list {
-    background-color: rgb(202, 229, 238);
+    background-color: rgb(253, 253, 253);
     padding:0;
     list-style-type: none;
     display: grid;
@@ -161,7 +162,7 @@ footer{
     align-items: center;
     flex-direction: column;
     width: 100%;
-    box-shadow: 0px 1.5px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1.5px 1px 1px rgba(7, 92, 62, 0.3);
     grid-template-columns: repeat(1, 1fr);
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
@@ -175,11 +176,17 @@ footer{
 .mobile-menu-list a{
     text-decoration: none;
     color: inherit;
+    transition: 0.4s;
+}
+
+.mobile-menu-list a:hover{
+    text-decoration: none;
+    color:rgb(7, 92, 62);
 }
 
 .mobile-submenu{
     display: grid;
-    background-color: rgb(202, 229, 238);
+    background-color: rgb(253, 253, 253);
     padding:1em 2em;
     position: absolute;
     list-style-type: none;
@@ -189,7 +196,7 @@ footer{
     top:0% !important;
     border-radius: 6px;
     z-index: 5;
-    box-shadow: 0px 1.5px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1.5px 1px px rgba(0, 0, 0, 0.2);
     grid-template-columns: repeat(2, 1fr);
     transition: right 0.3s ease;
 }
@@ -210,11 +217,11 @@ footer{
 }
 
 .mobile-submenu li:nth-child(even){
-    border: 0.5px solid #ffffff;
+    border: 0.5px solid rgb(7, 92, 62);
 }
 
 .mobile-submenu li:nth-child(odd){
-    border-top: 0.5px solid #ffffff;
-    border-bottom: 0.5px solid #ffffff;
-    border-right: 0.5px solid #ffffff;
+    border-top: 0.5px solid rgb(7, 92, 62);
+    border-bottom: 0.5px solid rgb(7, 92, 62);
+    border-right: 0.5px solid rgb(7, 92, 62);
 }
