@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeSubmenuItems();
     initializeBackButtons();
     initializeDocumentClickListener();
+    showLoginForm();
 });
 
 function initializeDropdownMenus() {
@@ -40,6 +41,8 @@ function initializeBackButtons() {
 function initializeDocumentClickListener() {
     document.addEventListener('click', function (event) {
         const isClickInsideDropdown = event.target.closest('.desktop-dropdown-menu');
+        const isClickInsideLoginForm = event.target.closest('.login-form');
+        const isClickLoginButton = event.target.closest('.login-show');
         
         if (!isClickInsideDropdown) {
             // Close all open dropdown menus
@@ -48,5 +51,29 @@ function initializeDocumentClickListener() {
                 dropdown.classList.remove('show');
             });
         }
+        if (!isClickInsideLoginForm && !isClickLoginButton) {
+            // Close the login form
+            const loginForm = document.querySelector('.login-form');
+            const body = document.body;
+            if (loginForm.classList.contains('show')) {
+                loginForm.classList.remove('show');
+                body.classList.remove('blurred');
+            }
+        }
+    });
+}
+
+
+function showLoginForm() {
+    const LoginShowButtons = document.querySelectorAll('.login-show');
+    const loginForm = document.querySelector('.login-form');
+    const body = document.body;
+
+    LoginShowButtons.forEach(function (showLogin) {
+        showLogin.addEventListener('click', function (event) {
+            event.preventDefault();
+            loginForm.classList.toggle('show');
+            body.classList.toggle('blurred');
+        });
     });
 }
