@@ -1,0 +1,49 @@
+/* login form */
+@media screen and (max-width: 768px) {
+    .login-form {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .login-form{
+        max-width :800px;
+        min-width :500px;
+        max-height :800px;
+        min-height :500px;
+    }
+}
+
+body.blurred *:not(.login-form):not(.login-form *) {
+    filter: blur(2px);
+    pointer-events: none; /* Prevent interaction with blurred elements */
+    user-select: none; /* Prevent text selection on blurred elements */
+    transition: filter 2s;
+}
+.login-form {
+    background-color: white;
+    position: absolute;
+    padding:2em;
+    height: 90%;
+    width: 90%;
+    top: -50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    box-shadow: 0px 5px 5px 3px rgba(4, 5, 5, 0.3)
+    , inset 0px 0px 0px 0.5px rgba(7, 92, 62, 0.3);
+    transition: top 0.4s ease;
+}
+
+.login-form.show {
+    top: 50%;
+}
+
+.login-title{
+    text-align: center;
+}
+
+.login-form div{
+    margin:1em 0;
+}
