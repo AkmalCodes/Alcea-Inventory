@@ -42,7 +42,6 @@ li{
 }
 
 .top-nav-wrapper {
-    position: relative;
     background-color: rgb(253, 253, 253);
     display: flex;
     justify-content: space-between;
@@ -65,7 +64,7 @@ li{
     /* justify-content: space-around; */
     align-items: center;
     width: 100%;
-    height: 5vh;
+    height: fit-content;
     background-color: rgb(253, 253, 253);
     box-shadow: inset 0px -1.5px 0px 0px rgba(7, 92, 62, 0.3)
 }
@@ -77,7 +76,8 @@ li{
     align-items: center;
     flex-direction: row;
     width: 100%;
-    margin:1em 0;
+    padding:1em 0;
+    margin: 0;
 }
 
 .desktop-menu>ul>li {
@@ -98,6 +98,7 @@ li{
 
 .desktop-dropdown-menu>ul{
     background-color: white;
+    visibility: hidden;
     width: 20%;
     border-radius: 6px;
     padding: 2em;
@@ -108,12 +109,13 @@ li{
     z-index: -5;
     box-shadow:0px 1.5px 1px 1px rgba(7, 92, 62, 0.3);
     /* Add opacity for smooth transition */
-    transition: top 0.3s ease, opacity 0.5s ease;
+    transition: top 0.4s ease, visibility 0.5s cubic-bezier(1, -0.03, 0.07, 0.98)
     /* Smooth transition */
 }
 
 .desktop-dropdown-menu>ul.show {
-    top: 10.5%;
+    top: 100px;
+    visibility: visible;
 }
 
 .desktop-dropdown-menu ul li {
@@ -124,26 +126,23 @@ li{
 
 @media screen and (max-width: 768px) {
     .desktop-menu {
-        display: none;
+        display: none !important;
     }
-
-    /* .top-nav-wrapper {
-        display: none;
-    } */
 }
 
 @media screen and (min-width: 768px) {
     .mobile-menu {
-        display: none;
+        display: none !important;
     }
 }
 
 /* Below are mobile menu css */
+
 .mobile-menu {
     display: block;
     position: absolute;
     width: 100%;
-    z-index: 10000;
+    z-index: 7;
     /* overflow-x: hidden; */
 }
 
@@ -181,7 +180,7 @@ li{
 .mobile-menu-list a{
     text-decoration: none;
     color: inherit;
-    transition: 0.4s;
+    transition: 0.4s ease;
 }
 
 .mobile-menu-list a:hover{
