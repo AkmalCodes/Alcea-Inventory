@@ -57,29 +57,31 @@
         </div>
         <div class="bottom-nav-wrapper">
             <nav class="desktop-menu">
-                <ul>
-                    <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li class="desktop-dropdown-menu">
-                        <a href="#">Inventory 1</a>
-                        <ul>
-                            <li><a href="#">Inventory 1.111</a></li>
-                            <li><a href="#">Inventory 1.12</a></li>
-                            <li><a href="#">Inventory 1.311</a></li>
-                            <li><a href="#">Inventory 1.12</a></li>
-                            <li><a href="#">Inventory 1.311</a></li>
-                        </ul>
-                    </li>
-                    <li class="desktop-dropdown-menu">
-                        <a href="#">item 3</a>
-                        <ul>
-                            <li><a href="#">Item 3.1</a></li>
-                            <li><a href="#">Item 3.2</a></li>
-                            <li><a href="#">Item 3.3</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <div class="container">
+                    <ul>
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li class="desktop-dropdown-menu">
+                            <a href="#">Inventory 1</a>
+                            <ul>
+                                <li><a href="#">Inventory 1.111</a></li>
+                                <li><a href="#">Inventory 1.12</a></li>
+                                <li><a href="#">Inventory 1.311</a></li>
+                                <li><a href="#">Inventory 1.12</a></li>
+                                <li><a href="#">Inventory 1.311</a></li>
+                            </ul>
+                        </li>
+                        <li class="desktop-dropdown-menu">
+                            <a href="#">item 3</a>
+                            <ul>
+                                <li><a href="#">Item 3.1</a></li>
+                                <li><a href="#">Item 3.2</a></li>
+                                <li><a href="#">Item 3.3</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </nav>
             <nav>
                 <div class="mobile-menu collapse navbar-collapse" id="navbarSupportedContent">
@@ -127,7 +129,7 @@
                                 <li><a href="#">Inventory 1.12</a></li>
                                 <li><a href="#">Inventory 1.12</a></li>
                                 <li><a href="#">Inventory 1.12</a></li>
-                                <li><a href="#">Inventory 1.12</a></li> 
+                                <li><a href="#">Inventory 1.12</a></li>
                             </ul>
                         </li>
                         <li class="mobile-has-submenu">
@@ -148,7 +150,7 @@
                                 <li><a href="#">Item 3.3</a></li>
                             </ul>
                         </li>
-                        <li><a href="#" class="login-show btn">login</a></li>
+                        <li><a href="#" class="login-show">login</a></li>
                     </ul>
                 </div>
             </nav>
@@ -200,28 +202,23 @@
                     <input type="email" class="form-control" id="inputEmail3">
                 </div>
                 <div class="col">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail3">
-                </div>
-
-                <div class="col">
-                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail3">
+                    <label for="inputPassword4" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="inputPassword4">
                 </div>
                 <div class="col">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="autoSizingCheck2">
                         <label class="form-check-label" for="autoSizingCheck2">
-                          Remember me
+                            Remember me
                         </label>
+                    </div>
+                    <div class="col d-flex justify-content-center align-items-center">
+                        <button class="login btn border-1">login</button>
+                    </div>
                 </div>
-                <div class="col d-flex justify-content-center align-items-center">
-                    <button class="login btn border-1">login</button>
-                </div>
-            </div>
         </form>
     </div>
-    
+
     <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
