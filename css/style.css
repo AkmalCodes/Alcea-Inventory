@@ -245,3 +245,9 @@ header{
     border-bottom: 0.5px solid rgb(7, 92, 62);
     border-right: none;
 }
+
+/* main styles */
+
+main p{
+    text-align: justify ;
+}
