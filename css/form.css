@@ -22,7 +22,7 @@ body.blurred :not(.login-form):not(.login-form *):not(li a) {
     filter: blur(4px);
     pointer-events: none; /* Prevent interaction with blurred elements */
     user-select: none; /* Prevent text selection on blurred elements */
-    transition: filter 0.5s cubic-bezier(0.46, 0.13, 0.43, 0.8);
+    transition: filter 1s cubic-bezier(0.46, 0.13, 0.43, 0.8);
 }
 .login-form {
     background-color: white;
@@ -37,7 +37,7 @@ body.blurred :not(.login-form):not(.login-form *):not(li a) {
     border-radius: 6px;
     box-shadow: 0px 5px 5px 3px rgba(4, 5, 5, 0.3)
     , inset 0px 0px 0px 0.5px rgba(7, 92, 62, 0.3);
-    transition: top 0.3s cubic-bezier(1, 0.5, 0, 0.46);
+    transition: top 0.5s ease;
 }
 
 .login-form.show {
