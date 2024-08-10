@@ -23,11 +23,11 @@ header{
     flex-shrink: 1,
     flex-basis: auto
     */
+    position: sticky;
+    top: 0;
 }
 
 main{
-    position: relative;
-    z-index: -6;
     flex: 1 1 auto;
 }
 
@@ -39,11 +39,6 @@ li{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-header{
-    position: sticky;
-    top: 0;
 }
 
 .top-nav-wrapper {
@@ -113,7 +108,7 @@ header{
     position: absolute;
     height: fit-content;
     top: -200%;
-    z-index: -5;
+    z-index:-1;
     box-shadow:0px 1.5px 1px 1px rgba(7, 92, 62, 0.3);
     /* Add opacity for smooth transition */
     transition: top 0.4s ease, visibility 0.5s cubic-bezier(1, 0.59, 0, 0.45);
@@ -122,6 +117,7 @@ header{
 
 .desktop-dropdown-menu>ul.show {
     top: 100%;
+    z-index:-1;
     visibility: visible;
 }
 
@@ -246,8 +242,97 @@ header{
     border-right: none;
 }
 
-/* main styles */
+/* ================== inventory page styles ==================*/
 
-main p{
-    text-align: justify ;
+.inventory-nav {
+    box-shadow:0px 1.5px 1px 1px rgba(7, 92, 62, 0.3);
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 1em 1em;
+    margin: 0;
+    border-radius: 6px;
+}
+
+.inventory-nav>li {
+    margin: 0 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inventory-nav>li>a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s ease;
+}
+
+.inventory-nav>li>a:hover {
+    font-weight: bolder;
+    color: rgb(7, 92, 62);
+}
+
+.sub-inventory-nav {
+    box-shadow:0px 1.5px 1px 1px rgba(7, 92, 62, 0.3);
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    padding: 1em 1em;
+    margin: 0;
+    border-radius: 6px;
+}
+
+.sub-inventory-nav>li {
+    margin: auto;
+}
+
+.sub-inventory-nav>li>a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s ease;
+}
+
+.sub-inventory-nav>li>a:hover {
+    font-weight: bolder;
+    color: rgb(7, 92, 62);
+}
+
+.inventory-table{
+    box-shadow:0px 1.5px 1px 1px rgba(7, 92, 62, 0.3);
+}
+
+.inventory-table th {
+    text-align: center;
+    padding: 1em;
+    border:0.5px solid rgba(7, 92, 62, 0.3);
+}
+
+.inventory-table th:first-child {
+    border-top-left-radius: 0.5px solid rgba(7, 92, 62, 0.3);
+}
+.inventory-table th:last-child {
+    border-top-right-radius: 0.5px solid rgba(7, 92, 62, 0.3);
+}
+
+.inventory-table tr>td:last-child{
+    border-right: 0.5px solid rgba(7, 92, 62, 0.3);
+}
+
+.inventory-table tr:last-child>td{
+    border-bottom: 0.5px solid rgba(7, 92, 62, 0.3);
+}
+
+.inventory-table td{
+    padding: 0.5em;
+}
+.inventory-table td{
+    border-left: 0.5px solid rgba(7, 92, 62, 0.3);
 }
