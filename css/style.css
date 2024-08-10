@@ -112,7 +112,7 @@ header{
     list-style-type: none;
     position: absolute;
     height: fit-content;
-    top: -100%;
+    top: -200%;
     z-index: -5;
     box-shadow:0px 1.5px 1px 1px rgba(7, 92, 62, 0.3);
     /* Add opacity for smooth transition */
@@ -121,7 +121,7 @@ header{
 }
 
 .desktop-dropdown-menu>ul.show {
-    top: 100px;
+    top: 100%;
     visibility: visible;
 }
 
