@@ -21,9 +21,9 @@
         <!-- place navbar here -->
     </header>
     <main>
-        <div class="desktop-inventory d-flex justify-content-between  justify-content-md-center p-3">
-            <div class="col-3 d-flex flex-column d-md-none">
-                <div class="container h-100">
+        <div class="desktop-inventory d-flex flex-row p-3">
+            <div class="col-2 d-none flex-column d-md-flex">
+                <div class="container-fluid h-100">
                     <ul class="inventory-nav">
                         <li><a href="#">front desk</a></li>
                         <li><a href="#">wet kitchen</a></li>
@@ -31,60 +31,190 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-9 d-flex flex-column">
+            <div class="col-10 col-md-10 d-flex flex-column justify-content-start">
                 <div class="inventory-view">
                     <div class="col-12">
-                        <div class="container">
+                        <div class="container-fluid  px-0 px-md-auto m-0">
                             <form class="d-flex">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <input class="form-control me-2" type="search" placeholder="Search"
+                                    aria-label="Search">
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
                     </div>
+                    <!-- BELOW IS CODE FOR INVENTORY VIEW -->
                     <div class="col-12 d-flex flex-column">
                         <nav class="navbar-nav">
-                            <div class="container h-100 py-3 ">
+                            <div class="container-fluid h-100 py-2 px-0 px-md-auto m-0">
                                 <ul class="sub-inventory-nav">
-                                    <li><a href="#">frozen</a></li>
-                                    <li><a href="#">dry</a></li>
-                                    <li><a href="#">wet</a></li>
+                                    <li><a href="#" data-value="frozen">Frozen</a></li>
+                                    <li><a href="#" data-value="dry">Dry</a></li>
+                                    <li><a href="#" data-value="wet">Wet</a></li>
                                 </ul>
                             </div>
                         </nav>
-                        <div class="container h-100">
-                            <table class="inventory-table w-100">
+                        <div class="inventory-view-desktop container-fluid h-100 d-none d-md-flex  px-0 px-md-auto m-0">
+                            <table class="w-100">
                                 <tr>
                                     <th>Product</th>
-                                    <th>Price</th>
+                                    <th>information</th>
                                     <th>Quantity</th>
                                     <th class="d-none d-md-block">Actions</th>
                                 </tr>
-                                <tr>
-                                    <td>Product 3132</td>
-                                    <td>$100</td>
+                                <tr class="inventory-view-desktop-item">
+                                    <td>
+                                        <a href="">
+                                            <div class="col-8 d-flex justify-content-center align-items-center">
+                                                <img height="100px" width="100px" src="resources/images/chicken.png" alt="">  
+                                            </div>
+                                            <div class="col-4">
+                                                <span>sugar</span>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li><p>Supplier:</p></li>
+                                            <li><p>Supllier name</p></li>
+                                            <li><p>Quantity:</p></li>
+                                            <li><p>5 packets</p></li>
+                                        </ul>
+                                    </td>
                                     <td>10</td>
-                                    <td class="d-none d-md-flex">
-                                        <button class="btn d-none d-md-block">Edit</button> 
-                                        <button class="btn d-none d-md-block">Delete</button>
+                                    <td>
+                                        <button class="btn">Edit</button>
+                                        <button class="btn">Delete</button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Product 3132</td>
-                                    <td>$100</td>
+                                <tr class="inventory-view-desktop-item">
+                                    <td>
+                                        <a href="#">
+                                            <div class="col-8 d-flex justify-content-center align-items-center">
+                                                <img height="100px" width="100px" src="resources/images/sugar.png" alt="">  
+                                            </div>
+                                            <div class="col-4">
+                                                <span>sugar</span>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li><p>Supplier:</p></li>
+                                            <li><p>Supllier name</p></li>
+                                            <li><p>Quantity:</p></li>
+                                            <li><p>5 packets</p></li>
+                                        </ul>
+                                    </td>
                                     <td>10</td>
-                                    <td class="d-none d-md-flex">
-                                        <button class="btn d-none d-md-block">Edit</button> 
-                                        <button class="btn d-none d-md-block">Delete</button>
+                                    <td>
+                                        <button class="btn">Edit</button>
+                                        <button class="btn">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr class="inventory-view-desktop-item">
+                                    <td>
+                                        <a href="">
+                                            <div class="col-8 d-flex justify-content-center align-items-center">
+                                                <img height="100px" width="100px" src="resources/images/chicken.png" alt="">  
+                                            </div>
+                                            <div class="col-4">
+                                                <span>sugar</span>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li><p>Supplier:</p></li>
+                                            <li><p>Supllier name</p></li>
+                                            <li><p>Quantity:</p></li>
+                                            <li><p>5 packets</p></li>
+                                        </ul>
+                                    </td>
+                                    <td>10</td>
+                                    <td>
+                                        <button class="btn">Edit</button>
+                                        <button class="btn">Delete</button>
                                     </td>
                                 </tr>
                             </table>
                         </div>
+                        <div class="inventory-view-mobile container-fluid h-100 d-flex d-md-none flex-column px-0 px-md-auto">
+                            <div class="inventory-view-mobile-item">
+                                <div class="top-inventory-view d-flex flex-row w-100 align-items-center">
+                                    <div class="left col-2 d-flex justify-content-center align-items-center">
+                                        <a href="#"><img src="resources/images/chicken.png" alt=""></a>
+                                    </div>
+                                    <div class="middle col-8">
+                                        <ul>
+                                            <li><p>Ingredient:</p></li>
+                                            <li><p>ingredient name</p></li>
+                                            <li><p>Supplier:</p></li>
+                                            <li><p>Supllier name</p></li>
+                                            <li><p>Quantity:</p></li>
+                                            <li><p>5 packets</p></li>
+                                        </ul>
+                                    </div>
+                                    <div class="right col-2 flex-column">
+                                        <div class="">
+                                            current stock
+                                        </div>
+                                        <div class="actions">
+                                            <button class="btn" style="font-size: 0.9em;">test</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bottom-inventory-view d-flex flex-row w-100 align-items-center">
+                                    <div class="left col-4">
+                                        Frozen
+                                    </div>
+                                    <div class="right col-4">
+                                        19/07/24 
+                                    </div>
+                                    <div class="right col-4">
+                                        Stocked
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inventory-view-mobile-item">
+                                <div class="top-inventory-view d-flex flex-row w-100 align-items-center">
+                                    <div class="left col-2 d-flex justify-content-center align-items-center">
+                                        <a href="#"><img src="resources/images/sugar.png" alt=""></a>
+                                    </div>
+                                    <div class="middle col-8">
+                                        <ul>
+                                            <li><p>Ingredient:</p></li>
+                                            <li><p>ingredient name</p></li>
+                                            <li><p>Supplier:</p></li>
+                                            <li><p>Supllier name</p></li>
+                                            <li><p>Quantity:</p></li>
+                                            <li><p>5 packets</p></li>
+                                        </ul>
+                                    </div>
+                                    <div class="right col-2 flex-column">
+                                        <div class="">
+                                            current stock
+                                        </div>
+                                        <div class="actions">
+                                            <button class="btn" style="font-size: 0.9em;">test</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bottom-inventory-view d-flex flex-row w-100 align-items-center">
+                                    <div class="left col-4">
+                                        Frozen
+                                    </div>
+                                    <div class="right col-4">
+                                        19/07/24 
+                                    </div>
+                                    <div class="right col-4">
+                                        Stocked
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="mobile-inventory">
-
         </div>
     </main>
 
