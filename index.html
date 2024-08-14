@@ -158,39 +158,103 @@
     </header>
     <main>
         <div class="container">
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-                Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-                Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-                Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-            <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-                Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-        </div>
+            <div class="desktop-inventory d-flex justify-content-center justify-content-md-between p-3">
+                <div class="col-3 d-none flex-column d-md-flex">
+                    <div class="container h-100">
+                        <ul class="inventory-nav">
+                            <li><a href="#">front desk</a></li>
+                            <li><a href="#">wet kitchen</a></li>
+                            <li><a href="#">dry kitchen</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-9 d-flex flex-column ">
+                    <div class="inventory-view">
+                        <div class="col-12">
+                            <div class="container  px-0 px-md-auto">
+                                <form class="d-flex">
+                                    <input class="form-control me-2" type="search" placeholder="Search"
+                                        aria-label="Search">
+                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- BELOW IS CODE FOR INVENTORY VIEW -->
+                        <div class="col-12 d-flex flex-column">
+                            <nav class="navbar-nav">
+                                <div class="container h-100 py-2 px-0 px-md-auto ">
+                                    <ul class="sub-inventory-nav">
+                                        <li><a href="#" data-value="frozen">Frozen</a></li>
+                                        <li><a href="#" data-value="dry">Dry</a></li>
+                                        <li><a href="#" data-value="wet">Wet</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="inventory-view-desktop container h-100 d-none d-md-flex  px-0 px-md-auto">
+                                <table class="w-100">
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>information</th>
+                                        <th>Quantity</th>
+                                        <th class="d-none d-md-block">Actions</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Product 3132</td>
+                                        <td>$100</td>
+                                        <td>10</td>
+                                        <td class="d-none d-md-flex">
+                                            <button class="btn d-none d-md-block">Edit</button>
+                                            <button class="btn d-none d-md-block">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Product 3132</td>
+                                        <td>$100</td>
+                                        <td>10</td>
+                                        <td class="d-none d-md-flex">
+                                            <button class="btn d-none d-md-block">Edit</button>
+                                            <button class="btn d-none d-md-block">Delete</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="container px-0 px-md-auto">
+                                <div class="inventory-view-mobile container h-100 d-flex d-md-none flex-column">
+                                    <div class="top-inventory-view d-flex flex-row w-100 align-items-center">
+                                        <div class="left col-2">
+                                            <a href="#"><img src="resources/images/sugar.png" alt=""></a>
+                                        </div>
+                                        <div class="middle col-8">
+                                            <ul>
+                                                <li><p>Ingredient:</p></li>
+                                                <li><p>ingredient name</p></li>
+                                                <li><p>Supplier:</p></li>
+                                                <li><p>Supllier name</p></li>
+                                                <li><p>Quantity:</p></li>
+                                                <li><p>5 packets</p></li>
+                                            </ul>
+                                        </div>
+                                        <div class="right col-2">
+                                            current stock
+                                        </div>
+                                    </div>
+                                    <div class="bottom-inventory-view d-flex flex-row w-100 align-items-center">
+                                        <div class="left col-4">
+                                            Frozen
+                                        </div>
+                                        <div class="right col-4">
+                                            19/07/24 
+                                        </div>
+                                        <div class="right col-4">
+                                            Stocked
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </main>
     <footer>
 
