@@ -8,5 +8,5 @@ class InventoryController extends Controller
 {
     public function content(){
         return view('inventory.inventoryView');
-    }
+    } 
 }
