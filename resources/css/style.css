@@ -362,9 +362,6 @@ li{
     justify-content: start;
 }
 
-.inventory-view-desktop a>img{
-    border-radius: 6px;
-}
 .inventory-view-desktop a{
     height: fit-content;
     width: 100%;;
@@ -381,6 +378,12 @@ li{
 .inventory-view-desktop-item {
     border-top: 1px solid rgba(7, 92, 62, 0.3);
     border-bottom: 1px solid rgba(7, 92, 62, 0.3);
+}
+
+.inventory-view-desktop-item img{
+    height: 75px;
+    width: 75px;
+    border-radius: 10px;
 }
 
 .inventory-view-desktop-item td:first-child span{
@@ -440,8 +443,9 @@ li{
 
 .top-inventory-view .left a>img{
     height: fit-content;
-    width: 100%;
-    border-radius: 6px;
+    width: 75px;
+    height: 75px;
+    border-radius: 10px;
 }
 
 .top-inventory-view .left a{
