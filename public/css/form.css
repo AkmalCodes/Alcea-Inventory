@@ -25,6 +25,7 @@ body.blurred :not(.login-form):not(.login-form *):not(li a) {
     transition: filter 0.6s ease-in-out;
 }
 .login-form {
+    visibility: hidden;
     background-color: white;
     position: absolute;
     padding:2em;
@@ -39,6 +40,10 @@ body.blurred :not(.login-form):not(.login-form *):not(li a) {
     box-shadow: 0px 5px 5px 3px rgba(4, 5, 5, 0.3)
     , inset 0px 0px 0px 0.5px rgba(7, 92, 62, 0.3);
     transition: opacity 0.1s ease-in, top 0.3s ease;
+}
+
+.login-form.showing{
+    visibility: visible;
 }
 
 .login-form.show {

@@ -433,24 +433,35 @@ li{
 .top-inventory-view ul li:nth-child(even){
     text-align: left;
     justify-content: start;
-
+    width:100px;
+    
 }
 
 .top-inventory-view ul li:nth-child(odd){
     text-align: left;
     justify-content: start;
+    width:20px;
 }
 
 .top-inventory-view .left a>img{
     height: fit-content;
-    width: 75px;
-    height: 75px;
+    width: 80%;
+    height: fit-content;
     border-radius: 10px;
 }
 
 .top-inventory-view .left a{
     height: fit-content;
+    display: flex;
+    justify-content:center ;
+    align-items: center;
     width: 100%;
+}
+
+.top-inventory-view .left button{
+    padding:0;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
 }
 
 .bottom-inventory-view{
