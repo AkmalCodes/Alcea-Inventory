@@ -1,5 +1,5 @@
 <!-- resources/views/inventory/inventoryIndex.blade.php -->
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('title', 'Inventory Management')
 
