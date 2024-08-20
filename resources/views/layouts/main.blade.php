@@ -28,10 +28,10 @@
     <footer>
         @include('layouts.footer')
     </footer>
-    @guest
+    {{-- @guest --}}
         @include('forms.login-form')
         @include('forms.register-form')
-    @endguest
+    {{-- @endguest --}}
 
 
     <!-- Common JS files -->
