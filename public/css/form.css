@@ -56,7 +56,7 @@ body.register-blurred :not(.register-form):not(.register-form *):not(li a) {
     visibility: visible;
 }
 
-.login-form.show,.register-form.showing {
+.login-form.show,.register-form.show {
     z-index: 10;
     top:50%;
     opacity: 1;
