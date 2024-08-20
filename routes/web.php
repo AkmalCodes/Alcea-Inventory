@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InventoryController;
 
 Route::get('/', function () {
-    return view('layouts.main');
+    return view('welcome');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
