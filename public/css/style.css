@@ -204,14 +204,15 @@ li{
     list-style-type: none;
     width: 100%;
     min-height: 100%;
-    right: 300% !important;
+    right: 100% !important;
     top: 0%!important;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
     z-index: 5;
+    opacity: 0;
     box-shadow:0px 1.5px 3px 1px rgba(7, 92, 62, 0.3);
     grid-template-columns: repeat(2, 1fr);
-    transition: right 0.4s cubic-bezier(1, 0.59, 0, 0.45);
+    transition: opacity 0.2s, right 0.2s cubic-bezier(1, 0.59, 0, 0.45);
 }
 
 .mobile-submenu.show {
@@ -301,7 +302,7 @@ li{
 .sub-inventory-nav>li>a {
     text-decoration: none;
     color: inherit;
-    transition: 0.3s ease;
+    transition: 0.2s ease;
 }
 
 .sub-inventory-nav>li>a:hover {
