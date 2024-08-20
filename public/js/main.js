@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeSubmenuItems();
     initializeBackButtons();
     initializeLoginForm();
+    initializeRegisterForm();
+    closeRegisterForm();
     closeLoginForm();
     closeMobileMenu();
     closeDesktopDropdown();
@@ -93,8 +95,8 @@ function closeLoginForm() {
                 }, 50);
                 setTimeout(function() {
                 loginForm.classList.remove('showing');
-                }, 400); // Match this duration with the transition time in CSS
-                body.classList.remove('blurred');
+                }, 100); // Match this duration with the transition time in CSS
+                body.classList.remove('login-blurred');
             }
         }
     });
@@ -109,23 +111,57 @@ function initializeLoginForm() {
     loginShowButtons.forEach(function (showLogin) {
         showLogin.addEventListener('click', function (event) {
             event.preventDefault();
-
-            // Close mobile menu if it is currently open
-            // if (mobileMenu.classList.contains('show')) {
-            //     const navbarToggler = document.querySelector('.navbar-toggler');
-            //     if (navbarToggler) {
-            //         // setTimeout(function() {
-            //             navbarToggler.click();
-            //         // }, 200);
-            //     }
-            // }
             // Add the 'showing' class first to make it visible
             loginForm.classList.add('showing');
-            body.classList.add('blurred');
+            body.classList.add('login-blurred');
 
             // Use setTimeout to add 'show' class after a short delay
             setTimeout(function() {
                 loginForm.classList.add('show');
+            }, 100); // Adjust the delay if needed for smoother transition
+        });
+    });     
+}
+
+function closeRegisterForm() {
+    document.addEventListener('click', function (event) {
+        const isClickInsideRegisterForm = event.target.closest('.register-form');
+        const isClickRegisterButton = event.target.closest('.register-show');
+
+        if (!isClickInsideRegisterForm && !isClickRegisterButton) {
+            // Close the login form
+            const registerForm = document.querySelector('.register-form');
+            const body = document.body;
+            if (registerForm.classList.contains('show')) {
+                setTimeout(() => {
+                    registerForm.classList.remove('show'); // added timeout to allow mobile menu to decide whether to clsoe or not
+                }, 50);
+                setTimeout(function() {
+                    registerForm.classList.remove('showing');
+                }, 100); // Match this duration with the transition time in CSS
+                body.classList.remove('register-blurred');
+            }
+        }
+    });
+}
+
+function initializeRegisterForm() {
+    const registerShowButton = document.querySelectorAll('.register-show');
+    const registerForm = document.querySelector('.register-form');
+    const body = document.body;
+    // const mobileMenu = document.querySelector('.mobile-menu');
+
+    registerShowButton.forEach(function (showRegister) {
+        showRegister.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            // Add the 'showing' class first to make it visible
+            registerForm.classList.add('showing');
+            body.classList.add('register-blurred');
+
+            // Use setTimeout to add 'show' class after a short delay
+            setTimeout(function() {
+                registerForm.classList.add('show');
             }, 100); // Adjust the delay if needed for smoother transition
         });
     });
