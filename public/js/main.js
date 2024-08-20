@@ -46,15 +46,31 @@ function closeMobileMenu() {
     document.addEventListener('click', function(event) {
         const mobileMenu = document.querySelector('.mobile-menu');
         const loginForm = document.querySelector('.login-form');
+        const registerForm = document.querySelector('.register-form');
+        const logoutForm = document.querySelector('.logout-form'); // Assuming you have a logout form
         const isClickNavbarToggler = event.target.closest('.navbar-toggler');
         const isClickMobileMenu = event.target.closest('.mobile-menu');
         const isClickInsideLoginForm = event.target.closest('.login-form');
-
-        if (loginForm.classList.contains('show')) {
-                return;
-        }else if (mobileMenu.classList.contains('show') && !loginForm.classList.contains('show') && !isClickNavbarToggler && !isClickMobileMenu && !isClickInsideLoginForm) {
+        const isClickInsideRegisterForm = event.target.closest('.register-form');
+        const isClickInsideLogoutForm = event.target.closest('.logout-form'); // Handling logout form clicks
+    
+        // If either login or register form is open, do nothing
+        if (loginForm.classList.contains('show') || registerForm.classList.contains('show') ){
+            return;
+        } 
+    
+        // If mobile menu is open and neither login nor register forms are open
+        if (mobileMenu.classList.contains('show') && 
+            !loginForm.classList.contains('show') && 
+            !registerForm.classList.contains('show') && 
+            !isClickNavbarToggler && 
+            !isClickMobileMenu && 
+            !isClickInsideLoginForm && 
+            !isClickInsideRegisterForm && 
+            !isClickInsideLogoutForm) {
+    
             const navbarToggler = document.querySelector('.navbar-toggler');
-            console.log('Login form is not visible, close the mobile menu');
+            console.log('No form is visible, close the mobile menu');
             if (navbarToggler) {
                 setTimeout(() => {
                     navbarToggler.click();
@@ -62,6 +78,7 @@ function closeMobileMenu() {
             }
         }
     });
+    
 }
 
 
