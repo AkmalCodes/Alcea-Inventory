@@ -29,6 +29,7 @@
         @include('layouts.footer')
     </footer>
     @include('forms.login-form')
+    @include('forms.register-form')
 
     <!-- Common JS files -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
