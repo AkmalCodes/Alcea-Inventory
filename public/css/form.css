@@ -19,20 +19,25 @@
 
 /* for some reason li a will take longer to unblur so i put 'li a' here */
 /* Blur everything except the login form and its children */
-body.login-blurred :not(.login-form):not(.login-form *):not(li a) { 
-    filter: blur(4px);
+body.login-blurred header, 
+body.login-blurred main, 
+body.login-blurred footer { 
+    filter: blur(20px);
     pointer-events: none;
     user-select: none;
-    transition: filter 1s ease-in-out;
+    transition: filter 0.1s;
 }
 
 /* Blur everything except the registration form and its children */
-body.register-blurred :not(.register-form):not(.register-form *):not(li a) { 
-    filter: blur(4px);
+body.register-blurred header, 
+body.register-blurred main, 
+body.register-blurred footer { 
+    filter: blur(20px);
     pointer-events: none;
     user-select: none;
-    transition: filter 1s ease-in-out;
+    transition: filter 0.1s;
 }
+
 
 .login-form,.register-form{
     visibility: hidden;
@@ -49,15 +54,15 @@ body.register-blurred :not(.register-form):not(.register-form *):not(li a) {
     border-radius: 6px;
     box-shadow: 0px 5px 5px 3px rgba(4, 5, 5, 0.3)
     , inset 0px 0px 0px 0.5px rgba(7, 92, 62, 0.3);
-    transition: opacity 0.1s ease-in, top 0.4s ease;
+    transition: opacity 0.1s ease-in, top 0.2s ease;
 }
 
 .login-form.showing,.register-form.showing{
-    visibility: visible;
+    z-index: 10;
 }
 
 .login-form.show,.register-form.show {
-    z-index: 10;
+    visibility: visible;
     top:50%;
     opacity: 1;
 }
