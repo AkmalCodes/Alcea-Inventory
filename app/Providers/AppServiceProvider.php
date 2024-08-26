@@ -3,10 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Http\Middleware\Authenticate;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
+    /** 
      * Register any application services.
      */
     public function register(): void
@@ -19,6 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Register middleware here
+        $this->app['router']->aliasMiddleware('auth.guard', Authenticate::class); // custom auth middleware
+
     }
 }
