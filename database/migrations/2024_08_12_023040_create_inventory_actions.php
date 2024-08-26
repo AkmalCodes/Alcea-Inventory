@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('inventory_actions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ingredient_id')->constrained('ingredients');
+            $table->foreignId('inventory_id')->constrained('inventory');
             $table->date('date_of_action');
             $table->enum('action_type', ['added', 'removed', 'adjusted']);
             $table->decimal('quantity_changed',8,2);

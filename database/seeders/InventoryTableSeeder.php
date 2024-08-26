@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class IngredientsTableSeeder extends Seeder
+class InventoryTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class IngredientsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('ingredients')->insert([
+        DB::table('inventory')->insert([
             [
                 'name' => 'Sugar',
                 'category' => 'Dry',

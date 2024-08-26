@@ -16,7 +16,7 @@ class InventoryActionsTableSeeder extends Seeder
     {
         DB::table('inventory_actions')->insert([
             [
-                'ingredient_id' => 1, // Corresponds to 'Sugar'
+                'inventory_id' => 1, // Corresponds to 'Sugar'
                 'date_of_action' => now(),
                 'action_type' => 'Added',
                 'quantity_changed' => 5.00,
@@ -25,7 +25,7 @@ class InventoryActionsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'ingredient_id' => 2, // Corresponds to 'Chicken Breast'
+                'inventory_id' => 2, // Corresponds to 'Chicken Breast'
                 'date_of_action' => now(),
                 'action_type' => 'Added',
                 'quantity_changed' => 10.00,
@@ -34,7 +34,7 @@ class InventoryActionsTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'ingredient_id' => 3, // Corresponds to 'Milk'
+                'inventory_id' => 3, // Corresponds to 'Milk'
                 'date_of_action' => now(),
                 'action_type' => 'Added',
                 'quantity_changed' => 10.00,
