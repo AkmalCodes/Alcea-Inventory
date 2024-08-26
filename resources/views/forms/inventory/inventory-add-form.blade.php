@@ -5,14 +5,14 @@
         <div class="container-fluid">
 
             <!-- Name -->
-            <div class="col mb-3">
+            <div >
                 <label for="name" class="col-form-label">Item Name</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
                 <span role="alert"><strong id="nameError"></strong></span>
             </div>
 
             <!-- Category -->
-            <div class="col mb-3">
+            <div >
                 <label for="category" class="col-form-label">Category</label>
                 <select class="form-control" id="category" name="category" required>
                     <option value="">Select a category</option>
@@ -82,7 +82,7 @@
             <!-- Submit Button -->
             <div class="col">
                 <div class="col d-flex justify-content-center align-items-center">
-                    <button type="submit" class="btn btn-primary">Add Item</button>
+                    <button type="submit" class="additem btn btn-primary">Add Item</button>
                 </div>
             </div>
 
