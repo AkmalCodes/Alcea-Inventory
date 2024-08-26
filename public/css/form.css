@@ -1,6 +1,6 @@
 /* login form */
 @media screen and (max-width: 768px) {
-    .login-form,.register-form {
+    .login-form,.register-form,.inventory-add-form {
         max-width :500px;
         min-width :300px;
         max-height :min-content;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (min-width: 768px) {
-    .login-form, .register-form{
+    .login-form, .register-form,.inventory-add-form{
         max-width :500px;
         min-width :300px;
         max-height :min-content;
@@ -56,12 +56,31 @@ body.register-blurred footer {
     , inset 0px 0px 0px 0.5px rgba(7, 92, 62, 0.3);
     transition: opacity 0.1s ease-in, top 0.2s ease;
 }
+.inventory-add-form{
+    display: grid;
+    visibility: hidden;
+    background-color: white;
+    position: absolute;
+    padding:2em;
+    height: fit-content;
+    width: 90%;
+    top: 40%;
+    left: 50%;
+    opacity: 0;
+    z-index: -10;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    box-shadow: 0px 5px 5px 3px rgba(4, 5, 5, 0.3)
+    , inset 0px 0px 0px 0.5px rgba(7, 92, 62, 0.3);
+    transition: opacity 0.1s ease-in, top 0.2s ease;
+    grid-template-columns: repeat(2, 1fr);
+}
 
-.login-form.showing,.register-form.showing{
+.login-form.showing,.register-form.showing,.inventory-add-form.showing{
     z-index: 10;
 }
 
-.login-form.show,.register-form.show {
+.login-form.show,.register-form.show,.inventory-add-form.show {
     visibility: visible;
     top:50%;
     opacity: 1;
@@ -71,7 +90,7 @@ body.register-blurred footer {
     margin:1em 0;
 }
 
-.login.btn, .register.btn{
+.login.btn, .register.btn, .additem.btn{
     box-shadow: 0px 5px 5px 1px rgba(4, 5, 5, 0.3)
     , inset 0px 0px 0px 0.5px rgba(7, 92, 62, 0.3);
     transition: 0.3s ease;
@@ -79,7 +98,7 @@ body.register-blurred footer {
     min-width: 100px;
 }
 
-.login.btn:hover,.register.btn:hover{
+.login.btn:hover,.register.btn:hover,.additem.btn:hover{
     font-weight: bolder;
     color: rgb(7, 92, 62);
 }

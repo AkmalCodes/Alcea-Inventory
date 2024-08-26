@@ -181,8 +181,51 @@ function initializeRegisterForm() {
                 registerForm.classList.add('show');
             }, 100); // Adjust the delay if needed for smoother transition
         });
-    });
-
-        
+    });     
 }
+
+function closeInventoryForm() {
+    document.addEventListener('click', function (event) {
+        const isClickInsideInventoryForm = event.target.closest('.inventory-add-form');
+        const isClickInventoryButton = event.target.closest('.additem-show');
+
+        if (!isClickInsideRegisterForm && !isClickRegisterButton) {
+            // Close the login form
+            const registerForm = document.querySelector('.inventory-add-form');
+            const body = document.body;
+            if (registerForm.classList.contains('show')) {
+                setTimeout(() => {
+                    registerForm.classList.remove('show'); // added timeout to allow mobile menu to decide whether to clsoe or not
+                }, 50);
+                setTimeout(function() {
+                    registerForm.classList.remove('showing');
+                }, 100); // Match this duration with the transition time in CSS
+                body.classList.remove('inventory-blurred');
+            }
+        }
+    });
+}
+
+function initializeReInventoryForm() {
+    const inventoryShowButton = document.querySelectorAll('.additem-show');
+    const inventoryForm = document.querySelector('.inventory-add-form');
+    const body = document.body;
+    // const mobileMenu = document.querySelector('.mobile-menu');
+
+    inventoryShowButton.forEach(function (showRegister) {
+        showRegister.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            // Add the 'showing' class first to make it visible
+            inventoryForm.classList.add('showing');
+            body.classList.add('inventory-blurred');
+
+            // Use setTimeout to add 'show' class after a short delay
+            setTimeout(function() {
+                inventoryForm.classList.add('show');
+            }, 100); // Adjust the delay if needed for smoother transition
+        });
+    });     
+}
+
 
