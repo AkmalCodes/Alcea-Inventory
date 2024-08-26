@@ -29,8 +29,8 @@
         @include('layouts.footer')
     </footer>
     {{-- @guest --}}
-        @include('forms.login-form')
-        @include('forms.register-form')
+        @include('forms.auth.login-form')
+        @include('forms.auth.register-form')
     {{-- @endguest --}}
 
 

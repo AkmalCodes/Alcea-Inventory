@@ -4,6 +4,7 @@
 @section('title', 'Inventory Management')
 
 @section('content')
+@include('forms.inventory.inventory-add-form')
 <div class="container-fluid">
     <div class="desktop-inventory d-flex flex-row p-3">
         <div class="col-md-2 d-none flex-column d-md-flex">
@@ -29,11 +30,19 @@
                 <!-- BELOW IS CODE FOR INVENTORY VIEW -->
                 <div class="col-12 d-flex flex-column">
                     <nav class="navbar-nav">
-                        <div class="container-fluid h-100 py-2 px-0 px-md-auto m-0">
+                        <div class="container-fluid d-flex justify-content-center align-items-center h-100 py-2 px-0 px-md-auto m-0">
                             <ul class="sub-inventory-nav">
                                 <li><a href="#" data-value="frozen">Frozen</a></li>
                                 <li><a href="#" data-value="dry">Dry</a></li>
                                 <li><a href="#" data-value="wet">Wet</a></li>
+                            </ul>
+                            <ul class="sub-inventory-nav">
+                                <li>
+                                    <a class="show-additem" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+                                    <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5z"/>
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
+                                    </svg>Add Item</a>
+                                </li>
                             </ul>
                         </div>
                     </nav>
