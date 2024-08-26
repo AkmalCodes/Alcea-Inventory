@@ -49,7 +49,7 @@
                 },
                 success: function(response) {
                     console.log('Login successful:', response);
-                    // window.location.href = response.redirect; // Redirect if login is successful
+                    window.location.href = response.redirect; // Redirect if login is successful
                 },
                 error: function(response) {
                     console.log('Login error:', response);
