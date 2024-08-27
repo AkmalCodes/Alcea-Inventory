@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory; // have to place this first before any other import
 use Illuminate\Http\Request;
-use app\Models\Inventory;
 
 class InventoryController extends Controller
 {
