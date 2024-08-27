@@ -1,7 +1,7 @@
 /* login form */
 @media screen and (max-width: 768px) {
     .login-form,.register-form,.inventory-add-form {
-        max-width :500px;
+        max-width :max-content;
         min-width :300px;
         max-height :min-content;
         min-height :400px;
@@ -38,6 +38,15 @@ body.register-blurred footer {
     transition: filter 0.1s;
 }
 
+body.inventory-blurred header, 
+body.inventory-blurred main> *:not(.inventory-add-form), 
+body.inventory-blurred footer { 
+    filter: blur(20px);
+    pointer-events: none;
+    user-select: none;
+    transition: filter 0.1s;
+}
+
 
 .login-form,.register-form{
     visibility: hidden;
@@ -56,8 +65,7 @@ body.register-blurred footer {
     , inset 0px 0px 0px 0.5px rgba(7, 92, 62, 0.3);
     transition: opacity 0.1s ease-in, top 0.2s ease;
 }
-.inventory-add-form{
-    display: grid;
+.inventory-add-form{ /* placed in main container*/
     visibility: hidden;
     background-color: white;
     position: absolute;
@@ -73,7 +81,29 @@ body.register-blurred footer {
     box-shadow: 0px 5px 5px 3px rgba(4, 5, 5, 0.3)
     , inset 0px 0px 0px 0.5px rgba(7, 92, 62, 0.3);
     transition: opacity 0.1s ease-in, top 0.2s ease;
+}
+
+.inventory-add-form ul{
     grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    padding: 0;
+}
+
+.inventory-add-form ul li{
+    margin:0.5em 0.5em;
+}
+
+.inventory-add-form div{
+    width:100% ;
+}
+
+.inventory-add-form h3{
+    grid-column: span 2;
+}
+
+.inventory-add-form ul li:last-child{
+    text-align: center;
+    grid-column: span 2;
 }
 
 .login-form.showing,.register-form.showing,.inventory-add-form.showing{
@@ -91,7 +121,7 @@ body.register-blurred footer {
 }
 
 .login.btn, .register.btn, .additem.btn{
-    box-shadow: 0px 5px 5px 1px rgba(4, 5, 5, 0.3)
+    box-shadow: 0px 2px 3px 1px rgba(4, 5, 5, 0.3)
     , inset 0px 0px 0px 0.5px rgba(7, 92, 62, 0.3);
     transition: 0.3s ease;
     border: none;
@@ -103,6 +133,6 @@ body.register-blurred footer {
     color: rgb(7, 92, 62);
 }
 
-form>.title{
+.form-title{
     text-align: center;
 }
