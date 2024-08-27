@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeBackButtons();
     initializeLoginForm();
     initializeRegisterForm();
+    initializeInventoryForm();
+    closeInventoryForm();
     closeRegisterForm();
     closeLoginForm();
     closeMobileMenu();
@@ -189,8 +191,7 @@ function closeInventoryForm() {
         const isClickInsideInventoryForm = event.target.closest('.inventory-add-form');
         const isClickInventoryButton = event.target.closest('.additem-show');
 
-        if (!isClickInsideRegisterForm && !isClickRegisterButton) {
-            // Close the login form
+        if (!isClickInsideInventoryForm && !isClickInventoryButton) {
             const registerForm = document.querySelector('.inventory-add-form');
             const body = document.body;
             if (registerForm.classList.contains('show')) {
@@ -206,11 +207,10 @@ function closeInventoryForm() {
     });
 }
 
-function initializeReInventoryForm() {
+function initializeInventoryForm() {
     const inventoryShowButton = document.querySelectorAll('.additem-show');
     const inventoryForm = document.querySelector('.inventory-add-form');
     const body = document.body;
-    // const mobileMenu = document.querySelector('.mobile-menu');
 
     inventoryShowButton.forEach(function (showRegister) {
         showRegister.addEventListener('click', function (event) {
