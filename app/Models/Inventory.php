@@ -14,7 +14,7 @@ class Inventory extends Model
      *
      * @var string
      */
-    protected $table = 'inventories';
+    protected $table = 'inventory';
 
     /**
      * The attributes that are mass assignable.
