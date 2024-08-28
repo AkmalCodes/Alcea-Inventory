@@ -71,7 +71,7 @@
                         <a href="#">Dashboard</a>
                     </li>
                     <li>
-                        <a href="{{ route('inventory.inventoryView') }}">Inventory</a>
+                        <a href="{{ route('inventory.inventory_view') }}">Inventory</a>
                     </li>
                     <li class="desktop-dropdown-menu">
                         <a href="#">item 3</a>
@@ -91,7 +91,7 @@
                         <a href="#"><span class="mt-1 me-2">Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="{{ route('inventory.inventoryView') }}"><span class="mt-1 me-2">Inventory</span></a>
+                        <a href="{{ route('inventory.inventory_view') }}"><span class="mt-1 me-2">Inventory</span></a>
                     </li>
                     <li class="mobile-has-submenu">
                         <a href="#" data-submenu="item-3"><span class="mt-1 me-2">items</span></a>
