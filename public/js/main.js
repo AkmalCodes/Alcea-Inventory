@@ -190,16 +190,17 @@ function closeInventoryForm() {
     document.addEventListener('click', function (event) {
         const isClickInsideInventoryForm = event.target.closest('.inventory-add-form');
         const isClickInventoryButton = event.target.closest('.additem-show');
+        const isInputFocused = document.activeElement.closest('.inventory-add-form'); // Check if the focused element is inside the form
 
-        if (!isClickInsideInventoryForm && !isClickInventoryButton) {
-            const registerForm = document.querySelector('.inventory-add-form');
+        if (!isClickInsideInventoryForm && !isClickInventoryButton && !isInputFocused) {
+            const inventoryForm = document.querySelector('.inventory-add-form');
             const body = document.body;
-            if (registerForm.classList.contains('show')) {
+            if (inventoryForm.classList.contains('show')) {
                 setTimeout(() => {
-                    registerForm.classList.remove('show'); // added timeout to allow mobile menu to decide whether to clsoe or not
+                    inventoryForm.classList.remove('show'); // added timeout to allow mobile menu to decide whether to close or not
                 }, 50);
                 setTimeout(function() {
-                    registerForm.classList.remove('showing');
+                    inventoryForm.classList.remove('showing');
                 }, 100); // Match this duration with the transition time in CSS
                 body.classList.remove('inventory-blurred');
             }
@@ -227,5 +228,6 @@ function initializeInventoryForm() {
         });
     });     
 }
+
 
 

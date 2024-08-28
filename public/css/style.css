@@ -331,12 +331,12 @@ li{
 .inventory-view-desktop ul{
     list-style-type: none;
     display: grid;
-    width: fit-content;
+    width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
     border-radius: 6px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .inventory-view-desktop ul li{
@@ -353,14 +353,14 @@ li{
 }
 
 .inventory-view-desktop ul li:nth-child(even){
-    text-align: left;
     justify-content: start;
+    grid-column: span 3;
 
 }
 
 .inventory-view-desktop ul li:nth-child(odd){
-    text-align: left;
-    justify-content: start;
+    justify-content: center;
+    grid-column: span 1;
 }
 
 .inventory-view-desktop a{
