@@ -14,8 +14,10 @@ class InventoryController extends Controller
     }
 
     public function view()
-    { // view to display inventory content
-        return view('inventory.inventoryView');
+    { 
+        $inventoryItems = Inventory::all();
+        // view to display inventory content
+        return view('inventory.inventory_view',compact('inventoryItems'));
     }
 
     public function store(Request $request)
@@ -44,10 +46,23 @@ class InventoryController extends Controller
                 'message' => 'Inventory item added successfully!',
                 'inventory' => $inventory
             ], 201); // 201 status code indicates that a resource was successfully created
+        }else{
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to add inventory item.',
+            ], 500);
         }
 
-        // Fallback for non-AJAX requests (normal form submission)
-        return redirect()->route('inventory.view')->with('success', 'Inventory item added successfully!');
+        // // Fallback for non-AJAX requests (normal form submission)
+        // return redirect()->route('inventory.view')->with('success', 'Inventory item added successfully!');
+    }
+
+    public function viewItem($id){
+         // Retrieve the inventory item by its ID
+        $item = Inventory::findOrFail($id);
+
+        // Pass the item to the view
+        return view('inventory.inventory_viewitem', compact('item')); // compact gets all fields in item then asociates the data with the fields
     }
 
 }
