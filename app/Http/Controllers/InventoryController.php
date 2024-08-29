@@ -20,6 +20,14 @@ class InventoryController extends Controller
         return view('inventory.inventory_view',compact('inventoryItems'));
     }
 
+    public function viewItem($id){
+        // Retrieve the inventory item by its ID
+       $item = Inventory::findOrFail($id);
+
+       // Pass the item to the view
+       return view('inventory.inventory_viewitem', compact('item')); // compact gets all fields in item then asociates the data with the fields
+   }
+
     public function store(Request $request)
     {
         // Validate the request data
@@ -55,14 +63,6 @@ class InventoryController extends Controller
 
         // // Fallback for non-AJAX requests (normal form submission)
         // return redirect()->route('inventory.view')->with('success', 'Inventory item added successfully!');
-    }
-
-    public function viewItem($id){
-         // Retrieve the inventory item by its ID
-        $item = Inventory::findOrFail($id);
-
-        // Pass the item to the view
-        return view('inventory.inventory_viewitem', compact('item')); // compact gets all fields in item then asociates the data with the fields
     }
 
 }
