@@ -116,7 +116,9 @@ function closeLoginForm() {
                 setTimeout(function() {
                 loginForm.classList.remove('showing');
                 }, 100); // Match this duration with the transition time in CSS
-                body.classList.remove('login-blurred');
+                setTimeout(function() {
+                    body.classList.remove('login-blurred');
+                }, 200);
             }
         }
     });
@@ -160,7 +162,9 @@ function closeRegisterForm() {
                 setTimeout(function() {
                     registerForm.classList.remove('showing');
                 }, 100); // Match this duration with the transition time in CSS
-                body.classList.remove('register-blurred');
+                setTimeout(function() {
+                    body.classList.remove('register-blurred');
+                }, 200);
             }
         }
     });
@@ -204,7 +208,10 @@ function closeInventoryForm() {
                 setTimeout(function() {
                     inventoryForm.classList.remove('showing');
                 }, 100); // Match this duration with the transition time in CSS
-                body.classList.remove('inventory-blurred');
+                setTimeout(function() {
+                    body.classList.remove('inventory-blurred');
+                }, 200);
+                
             }
         }
     });
