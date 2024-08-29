@@ -32,6 +32,7 @@
                     <nav class="navbar-nav">
                         <div class="container-fluid d-flex justify-content-center align-items-center h-100 py-2 px-0 px-md-auto m-0">
                             <ul class="sub-inventory-nav">
+                                <li><a href="#" data-value="all">All</a></li>
                                 <li><a href="#" data-value="frozen">Frozen</a></li>
                                 <li><a href="#" data-value="dry">Dry</a></li>
                                 <li><a href="#" data-value="wet">Wet</a></li>
@@ -56,14 +57,14 @@
                                 <th class="d-none d-md-block">Actions</th>
                             </tr>
                             @foreach($inventoryItems as $item)
-                            <tr class="inventory-view-desktop-item">
+                            <tr class="inventory-view-desktop-item" data-category="{{$item->category}}">
                                 <td>
-                                    <a href="{{route('inventory.inventory_viewitem', $item->id)}}">
-                                        <div class="col-8 d-flex justify-content-center align-items-center">
+                                    <a class=""href="{{route('inventory.inventory_viewitem', $item->id)}}">
+                                        <div class="col-6 d-flex justify-content-center align-items-center pe-1 ps-1">
                                             <!-- Replace with dynamic image source if available -->
                                             <img src="{{ asset('images/chicken.png') }}" alt="{{ $item->name }}">
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-6" style="text-align: left;">
                                             <span>{{ $item->name }}</span>
                                         </div>
                                     </a>
@@ -74,6 +75,8 @@
                                         <li><p>{{ $item->supplier_name }}</p></li>
                                         <li><p>Quantity:</p></li>
                                         <li><p>{{ $item->quantity }} {{ $item->unit }}</p></li>
+                                        <li><p>Category:</p></li>
+                                        <li><p>{{ $item->category }}</p></li>
                                     </ul>
                                 </td>
                                 <td>{{ $item->quantity }}</td>
@@ -106,7 +109,7 @@
                     {{--------------------------- BELOW IS MOBILE VIEW ---------------------------}}
                     <div class="inventory-view-mobile container-fluid h-100 d-flex d-md-none flex-column px-0 px-md-auto">
                         @foreach($inventoryItems as $item)
-                        <div class="inventory-view-mobile-item">
+                        <div class="inventory-view-mobile-item" data-category="{{$item->category}}">
                             <div class="top-inventory-view d-flex flex-row w-100 align-items-center">
                                 <div class="row">
                                     <div
@@ -181,4 +184,30 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('a[data-value]').on('click', function(event) {
+            event.preventDefault();
+            var selectedCategory = $(this).data('value');
+
+            // Show or hide items based on the selected category
+            $('.inventory-view-desktop-item').each(function() {
+                var itemCategory = $(this).data('category');
+                if (selectedCategory === 'all' || itemCategory === selectedCategory) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+            $('.inventory-view-mobile-item').each(function() {
+            var itemCategory = $(this).data('category');
+            if (selectedCategory === 'all' || itemCategory === selectedCategory) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+        });
+    });
+</script>
 @endsection
