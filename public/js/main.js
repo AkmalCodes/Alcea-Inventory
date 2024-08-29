@@ -103,8 +103,9 @@ function closeLoginForm() {
     document.addEventListener('click', function (event) {
         const isClickInsideLoginForm = event.target.closest('.login-form');
         const isClickLoginButton = event.target.closest('.login-show');
+        const isInputFocused = document.activeElement.closest('.login-form');
 
-        if (!isClickInsideLoginForm && !isClickLoginButton) {
+        if (!isClickInsideLoginForm && !isClickLoginButton && !isInputFocused) {
             // Close the login form
             const loginForm = document.querySelector('.login-form');
             const body = document.body;
@@ -146,8 +147,9 @@ function closeRegisterForm() {
     document.addEventListener('click', function (event) {
         const isClickInsideRegisterForm = event.target.closest('.register-form');
         const isClickRegisterButton = event.target.closest('.register-show');
+        const isInputFocused = document.activeElement.closest('.register-form');
 
-        if (!isClickInsideRegisterForm && !isClickRegisterButton) {
+        if (!isClickInsideRegisterForm && !isClickRegisterButton && !isInputFocused) {
             // Close the login form
             const registerForm = document.querySelector('.register-form');
             const body = document.body;
