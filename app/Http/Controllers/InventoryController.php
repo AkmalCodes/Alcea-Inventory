@@ -28,6 +28,64 @@ class InventoryController extends Controller
        return view('inventory.inventory_viewitem', compact('item')); // compact gets all fields in item then asociates the data with the fields
    }
 
+   public function destroy(Request $request, $id)
+    {
+        // Find the item by its ID
+        $item = Inventory::findOrFail($id);
+
+        // Delete the item
+        $item->delete();
+
+        // Return a success message
+        if ($request->expectsJson()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Inventory deleted successfully!',
+            ], 200); // 200 status code indicates that the request was successful
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Inventory deleted unsuccessful!',
+            ], 500);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'category' => 'required|in:dry,frozen,wet',
+            'description' => 'nullable|string',
+            'quantity' => 'required|numeric|min:0',
+            'unit' => 'required|string|max:255',
+            'reorder_level' => 'nullable|numeric|min:0',
+            'storage_location' => 'nullable|string|max:255',
+            'expiration_date' => 'nullable|date',
+            'supplier_name' => 'nullable|string|max:255',
+            'supplier_contact' => 'nullable|string|max:255',
+        ]);
+
+        // Find the existing inventory item by ID
+        $inventory = Inventory::findOrFail($id);
+
+        // Update the inventory item with the validated data
+        $inventory->update($validatedData);
+
+        // Check if the request expects a JSON response
+        if ($request->expectsJson()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Inventory item updated successfully!',
+                'data' => $inventory // Optionally return the updated inventory item
+            ]);
+        }
+
+        // Redirect back with a success message if not a JSON request
+        return redirect()->route('inventory.inventoryView')
+                         ->with('success', 'Inventory item updated successfully!');
+    }
+
     public function store(Request $request)
     {
         // Validate the request data
