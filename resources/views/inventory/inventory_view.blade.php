@@ -84,12 +84,12 @@
                                 <td>
                                     <div class="container-fluid m-0 p-0 d-flex justify-content-center align-items-center">
                                         <!-- Actions such as edit, delete, etc. -->
-                                        <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center" style="background-color: transparent;">
+                                        <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center add-item-quantity" style="background-color: transparent;" data-id="{{ $item->id }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                                             </svg>
                                         </button>
-                                        <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center" style="background-color: transparent;">
+                                        <button type="button" class="delete-item col-4 mt-1 border-0 d-flex justify-content-center align-items-center delete-item" data-id="{{ $item->id }}" style="background-color: transparent;">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                                             </svg>
@@ -209,5 +209,35 @@
         });
         });
     });
+    $(document).ready(function() {
+        $('.delete-item').on('click', function(event) {
+        event.preventDefault();
+        var itemId = $(this).data('id');
+        var token = '{{ csrf_token() }}';
+        var itemRow = $(this).closest('.inventory-view-desktop-item, .inventory-view-mobile-item'); // Adjust this selector to target the correct item row
+
+        if (confirm('Are you sure you want to delete this item?')) {
+            $.ajax({
+                url: '/inventory/delete/' + itemId,
+                type: 'DELETE',
+                dataType:'json',
+                data: {
+                    _token: token
+                },
+                success: function(response) {
+                    alert(response.message);
+                    // Remove the item from the DOM
+                    itemRow.fadeOut(300, function() {
+                        $(this).remove(); // Remove the element after fade out
+                    });
+                },
+                error: function(response) {
+                    alert('Error deleting item.');
+                }
+            });
+        }
+    });
+});
+
 </script>
 @endsection
