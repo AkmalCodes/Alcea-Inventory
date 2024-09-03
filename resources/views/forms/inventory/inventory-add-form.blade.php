@@ -4,16 +4,16 @@
         <h3 class="form-title">Add Inventory Item</h3>
         <ul>
             <li class="nav-item">
-                <div class="form-group">
-                    <label for="name" class="col-form-label">Item Name</label>
+                <div class="input-group d-flex ">
+                    <span class="input-group-text" id="basic-addon1">Name</span>
                     <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"
                         required>
                     <span role="alert"><strong id="nameError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
-                <div class="form-group">
-                    <label for="category" class="col-form-label">Category</label>
+                <div class="input-group d-flex">
+                    <span class="input-group-text" id="basic-addon1">Category</span>
                     <select class="form-control" id="category" name="category" required>
                         <option value="">Select a category</option>
                         <option value="dry">Dry</option>
@@ -24,63 +24,63 @@
                 </div>
             </li>
             <li class="nav-item">
-                <div class="form-group">
-                    <label for="description" class="col-form-label">Description</label>
+                <div class="input-group d-flex">
+                    <span class="input-group-text" id="basic-addon1">Description</span>
                     <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
                     <span role="alert"><strong id="descriptionError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
-                <div class="form-group">
-                    <label for="quantity" class="col-form-label">Quantity</label>
+                <div class="input-group d-flex">
+                    <span class="input-group-text" id="basic-addon1">Quantity</span>
                     <input type="number" class="form-control" id="quantity" name="quantity"
                         value="{{ old('quantity') }}" required step="0.01">
                     <span role="alert"><strong id="quantityError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
-                <div class="form-group">
-                    <label for="unit" class="col-form-label">Unit</label>
+                <div class="input-group d-flex">
+                    <span class="input-group-text" id="basic-addon1">Unit</span>
                     <input type="text" class="form-control" id="unit" name="unit" value="{{ old('unit') }}"
                         required>
                     <span role="alert"><strong id="unitError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
-                <div class="form-group">
-                    <label for="reorder_level" class="col-form-label">Reorder Level</label>
+                <div class="input-group d-flex">
+                    <span class="input-group-text" id="basic-addon1">Reorder Level</span>
                     <input type="number" class="form-control" id="reorder_level" name="reorder_level"
                         value="{{ old('reorder_level') }}" step="0.01">
                     <span role="alert"><strong id="reorderLevelError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
-                <div class="form-group">
-                    <label for="storage_location" class="col-form-label">Storage Location</label>
+                <div class="input-group d-flex">
+                    <span class="input-group-text" id="basic-addon1">Storage Location</span>
                     <input type="text" class="form-control" id="storage_location" name="storage_location"
                         value="{{ old('storage_location') }}">
                     <span role="alert"><strong id="storageLocationError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
-                <div class="form-group">
-                    <label for="expiration_date" class="col-form-label">Expiration Date</label>
+                <div class="input-group d-flex">
+                    <span class="input-group-text" id="basic-addon1">Expiration Date</span>
                     <input type="date" class="form-control" id="expiration_date" name="expiration_date"
                         value="{{ old('expiration_date') }}">
                     <span role="alert"><strong id="expirationDateError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
-                <div class="form-group">
-                    <label for="supplier_name" class="col-form-label">Supplier Name</label>
+                <div class="input-group d-flex">
+                    <span class="input-group-text" id="basic-addon1">Supplier Name</span>
                     <input type="text" class="form-control" id="supplier_name" name="supplier_name"
                         value="{{ old('supplier_name') }}">
                     <span role="alert"><strong id="supplierNameError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
-                <div class="form-group">
-                    <label for="supplier_contact" class="col-form-label">Supplier Contact</label>
+                <div class="input-group d-flex">
+                    <span class="input-group-text" id="basic-addon1">Supplier Contact</span>
                     <input type="text" class="form-control" id="supplier_contact" name="supplier_contact"
                         value="{{ old('supplier_contact') }}">
                     <span role="alert"><strong id="supplierContactError"></strong></span>
