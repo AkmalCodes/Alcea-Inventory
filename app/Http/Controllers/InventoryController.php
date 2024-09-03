@@ -20,9 +20,14 @@ class InventoryController extends Controller
         return view('inventory.inventory_view',compact('inventoryItems'));
     }
 
+    public function get($id){
+        $item = Inventory::findOrFail($id);
+        return $item;
+    }
+
     public function viewItem($id){
         // Retrieve the inventory item by its ID
-       $item = Inventory::findOrFail($id);
+       $item = $this->getItem($id);
 
        // Pass the item to the view
        return view('inventory.inventory_viewitem', compact('item')); // compact gets all fields in item then asociates the data with the fields
@@ -50,7 +55,7 @@ class InventoryController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function patch(Request $request, $id)
     {
         // Validate the request data
         $validatedData = $request->validate([
@@ -79,11 +84,12 @@ class InventoryController extends Controller
                 'message' => 'Inventory item updated successfully!',
                 'data' => $inventory // Optionally return the updated inventory item
             ]);
+        }else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Inventory iten update unsuccessful!',
+            ], 500);
         }
-
-        // Redirect back with a success message if not a JSON request
-        return redirect()->route('inventory.inventoryView')
-                         ->with('success', 'Inventory item updated successfully!');
     }
 
     public function store(Request $request)

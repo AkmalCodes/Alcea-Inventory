@@ -19,7 +19,9 @@ Route::post('/inventory', [InventoryController::class, 'store'])->name('inventor
 // Route to delete selected item
 Route::delete('/inventory/delete/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
 // Route to delete selected item
-Route::update('/inventory/update/{id}', [InventoryController::class, 'update'])->name('inventory.update');
+Route::patch('/inventory/update/{id}', [InventoryController::class, 'patch'])->name('inventory.patch');
+// Route to view retrieve specific item data
+Route::get('/inventory/get/{id}', [InventoryController::class, 'get'])->name('inventory.get');
 
 // ================== Authentication Routes ==================
 Auth::routes();
