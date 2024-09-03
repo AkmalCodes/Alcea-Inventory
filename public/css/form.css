@@ -6,6 +6,10 @@
         max-height :min-content;
         min-height :400px;
     }
+
+    .inventory-add-form li{
+        grid-column:span 2 ;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -69,7 +73,7 @@ body.inventory-blurred footer {
     visibility: hidden;
     background-color: white;
     position: absolute;
-    padding:2em;
+    padding:0.5em;
     height: fit-content;
     width: 90%;
     top: 40%;
@@ -98,12 +102,23 @@ body.inventory-blurred footer {
 }
 
 .inventory-add-form h3{
+    margin:1em 0;
     grid-column: span 2;
 }
 
 .inventory-add-form ul li:last-child{
     text-align: center;
     grid-column: span 2;
+}
+
+.inventory-add-form div span:first-child{
+    width: 45%;
+    font-size: 0.8em;
+}
+
+.inventory-add-form div input,.inventory-add-form div select{
+    width: 55%;
+    font-size: 0.8em !important;
 }
 
 .login-form.showing,.register-form.showing,.inventory-add-form.showing{
