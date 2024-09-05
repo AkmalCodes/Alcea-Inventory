@@ -194,24 +194,39 @@ function initializeRegisterForm() {
 
 function closeInventoryForm() {
     document.addEventListener('click', function (event) {
-        const isClickInsideInventoryForm = event.target.closest('.inventory-add-form');
-        const isClickInventoryButton = event.target.closest('.additem-show');
-        const isInputFocused = document.activeElement.closest('.inventory-add-form'); // Check if the focused element is inside the form
+        const isClickInsideInventoryForm = event.target.closest('.inventory-add-form, .inventory-update-form'); // Include both forms
+        const isClickInventoryButton = event.target.closest('.additem-show, .updateitem-show'); // Include update button
+        const isInputFocused = document.activeElement.closest('.inventory-add-form, .inventory-update-form'); // Check if focused element is in any form
 
         if (!isClickInsideInventoryForm && !isClickInventoryButton && !isInputFocused) {
-            const inventoryForm = document.querySelector('.inventory-add-form');
+            const inventoryAddForm = document.querySelector('.inventory-add-form');
+            const inventoryUpdateForm = document.querySelector('.inventory-update-form'); // Add update form selector
             const body = document.body;
-            if (inventoryForm.classList.contains('show')) {
+
+            // Hide add form if visible
+            if (inventoryAddForm && inventoryAddForm.classList.contains('show')) {
                 setTimeout(() => {
-                    inventoryForm.classList.remove('show'); // added timeout to allow mobile menu to decide whether to close or not
+                    inventoryAddForm.classList.remove('show');
                 }, 50);
                 setTimeout(function() {
-                    inventoryForm.classList.remove('showing');
-                }, 100); // Match this duration with the transition time in CSS
+                    inventoryAddForm.classList.remove('showing');
+                }, 100);
                 setTimeout(function() {
                     body.classList.remove('inventory-blurred');
                 }, 200);
-                
+            }
+
+            // Hide update form if visible
+            if (inventoryUpdateForm && inventoryUpdateForm.classList.contains('show')) {
+                setTimeout(() => {
+                    inventoryUpdateForm.classList.remove('show');
+                }, 50);
+                setTimeout(function() {
+                    inventoryUpdateForm.classList.remove('showing');
+                }, 100);
+                setTimeout(function() {
+                    body.classList.remove('inventory-blurred');
+                }, 200);
             }
         }
     });
@@ -219,24 +234,40 @@ function closeInventoryForm() {
 
 function initializeInventoryForm() {
     const inventoryShowButton = document.querySelectorAll('.additem-show');
-    const inventoryForm = document.querySelector('.inventory-add-form');
+    const inventoryUpdateButton = document.querySelectorAll('.updateitem-show'); // Update button
+    const inventoryAddForm = document.querySelector('.inventory-add-form');
+    const inventoryUpdateForm = document.querySelector('.inventory-update-form'); // Update form
     const body = document.body;
 
+    // Show Add Item Form
     inventoryShowButton.forEach(function (showRegister) {
         showRegister.addEventListener('click', function (event) {
             event.preventDefault();
 
-            // Add the 'showing' class first to make it visible
-            inventoryForm.classList.add('showing');
+            inventoryAddForm.classList.add('showing');
             body.classList.add('inventory-blurred');
 
-            // Use setTimeout to add 'show' class after a short delay
             setTimeout(function() {
-                inventoryForm.classList.add('show');
-            }, 100); // Adjust the delay if needed for smoother transition
+                inventoryAddForm.classList.add('show');
+            }, 100);
         });
-    });     
+    });
+
+    // Show Update Item Form
+    inventoryUpdateButton.forEach(function (showUpdate) {
+        showUpdate.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            inventoryUpdateForm.classList.add('showing');
+            body.classList.add('inventory-blurred');
+
+            setTimeout(function() {
+                inventoryUpdateForm.classList.add('show');
+            }, 100);
+        });
+    });
 }
+
 
 
 
