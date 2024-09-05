@@ -20,7 +20,7 @@ class InventoryController extends Controller
         return view('inventory.inventory_view',compact('inventoryItems'));
     }
 
-    public function get($id){
+    public function getItem($id){
         $item = Inventory::findOrFail($id);
         return $item;
     }
