@@ -5,6 +5,7 @@
 
 @section('content')
 @include('forms.inventory.inventory-add-form')
+@include('forms.inventory.inventory-update-form')
 <div class="container-fluid">
     <div class="desktop-inventory d-flex flex-row p-3">
         <div class="col-md-2 d-none flex-column d-md-flex">
@@ -117,8 +118,8 @@
                                         <a href="#"><img src="{{ asset('images/chicken.png') }}" alt="{{ $item->name }}"></a>
                                         <div class="row d-flex justify-content-around flex-row w-100">
                                             <button
-                                                class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center"
-                                                style="background-color: transparent;">
+                                                class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center add-item-quantity"
+                                                style="background-color: transparent;" data-id="{{ $item->id }}" >
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                                     <path
@@ -126,8 +127,8 @@
                                                 </svg>
                                             </button>
                                             <button
-                                                class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center"
-                                                style="background-color: transparent;">
+                                                class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center delete-item"
+                                                style="background-color: transparent;" data-id="{{ $item->id }}" >
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                     <path
@@ -135,8 +136,8 @@
                                                 </svg>
                                             </button>
                                             <button
-                                                class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center"
-                                                style="background-color: transparent;">
+                                                class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center updateitem-show" 
+                                                style="background-color: transparent;" data-id="{{ $item->id }}" >
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path
