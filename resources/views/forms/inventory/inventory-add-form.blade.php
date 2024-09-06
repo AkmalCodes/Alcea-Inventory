@@ -26,7 +26,7 @@
             <li class="nav-item">
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Description</span>
-                    <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
+                    <input type="text" class="form-control" id="description" name="description">{{ old('description') }}</input>
                     <span role="alert"><strong id="descriptionError"></strong></span>
                 </div>
             </li>
@@ -100,6 +100,7 @@
     $(document).ready(function() {
         $('#inventoryaddForm').on('submit', function(e) {
             e.preventDefault(); // Prevent default form submission
+            var div = $('.inventory-add-form');
 
             $.ajax({
                 type: 'POST',
@@ -113,6 +114,7 @@
                     console.log('Item added successfully:', response);
                     // Optionally, clear the form or update the UI
                     alert(response.message); // Display a success message
+                    closeFormWithTransition(div);
                     $('#inventoryaddForm')[0].reset(); // Reset the form fields
                 },
                 error: function(response) {
