@@ -69,7 +69,7 @@
             <div class="container">
                 <ul>
                     <li>
-                        <a href="#">Dashboard</a>
+                        <a href="{{ route('dashboard.dashboard_view') }}">Dashboard</a>
                     </li>
                     <li>
                         <a href="{{ route('inventory.inventory_view') }}">Inventory</a>
