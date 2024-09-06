@@ -3,10 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+Route::get('/dashboard', [DashboardController::class, 'view'])->name('dashboard_view');
 
 Route::get('/home', [HomeController::class, 'view'])->name('home');
 
@@ -25,6 +27,9 @@ Route::get('/inventory/get/{id}', [InventoryController::class, 'getItem'])->name
 
 // ================== Authentication Routes ==================
 Auth::routes();
+
+
+
 
 
 
