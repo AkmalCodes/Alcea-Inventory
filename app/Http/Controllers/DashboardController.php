@@ -15,6 +15,6 @@ class DashboardController extends Controller
         $totalItems = Inventory::count();
         $lowStockItems = Inventory::where('quantity', '<', 'reorder_level')->count(); // Low stock
         $recentUpdates = Inventory::where('updated_at', '>=', now()->subDays(7))->count(); // Items updated within the last 7 days
-        return view('dashboard', compact('totalItems', 'lowStockItems', 'recentUpdates'));
+        return view('dashboard.dashboard', compact('totalItems', 'lowStockItems', 'recentUpdates'));
     }
 }
