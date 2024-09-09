@@ -114,7 +114,7 @@
                     console.log('Item added successfully:', response);
                     // Optionally, clear the form or update the UI
                     alert(response.message); // Display a success message
-                    closeFormWithTransition(div);
+                    closeFormWithTransition(div,'inventory-blurred');
                     $('#inventoryaddForm')[0].reset(); // Reset the form fields
                 },
                 error: function(response) {
