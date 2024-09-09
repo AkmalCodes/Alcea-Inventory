@@ -57,6 +57,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Done by</th>
+                                <th>Action done</th>
                                 <th>Last Updated</th>
                             </tr>
                         </thead>
@@ -65,6 +66,7 @@
                                 <tr>
                                     <td>{{ $item->inventory->name }}</td>
                                     <td>{{ $item->performed_by }}</td>
+                                    <td>{{ $item->action_type }}</td>
                                     <td>{{ $item->updated_at->format('d/m/Y') }}</td>
                                 </tr>
                             @endforeach
