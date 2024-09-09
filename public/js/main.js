@@ -98,7 +98,7 @@ function closeDesktopDropdown(){
     });
 }
 
-function closeFormWithTransition(form) {
+function closeFormWithTransition(form, blurClass) {
     const body = document.body;
 
     // Check if the form is a jQuery object
@@ -120,9 +120,9 @@ function closeFormWithTransition(form) {
         }, 100);
     }
 
-    // Remove inventory blur after transition
+    // Remove the specific blurred class after the transition
     setTimeout(function() {
-        body.classList.remove('inventory-blurred');
+        body.classList.remove(blurClass); // Use the passed blur class
     }, 200);
 }
 
@@ -136,8 +136,7 @@ function closeLoginForm() {
             // Close the login form
             const loginForm = document.querySelector('.login-form');
             if (loginForm.classList.contains('show')) {
-                closeFormWithTransition(loginForm);
-            }
+                closeFormWithTransition(loginForm, 'login-blurred');            }
         }
     });
 }
@@ -173,7 +172,7 @@ function closeRegisterForm() {
             // Close the login form
             const registerForm = document.querySelector('.register-form');
             if (registerForm.classList.contains('show')) {
-                closeFormWithTransition(registerForm);
+                closeFormWithTransition(registerForm, 'register-blurred');            
             }
         }
     });
@@ -213,12 +212,12 @@ function closeInventoryForm() {
 
             // Hide add form if visible
             if (inventoryAddForm && inventoryAddForm.classList.contains('show')) {
-                closeFormWithTransition(inventoryAddForm);
+                closeFormWithTransition(inventoryAddForm,'inventory-blurred');
             }
 
             // Hide update form if visible
             if (inventoryUpdateForm && inventoryUpdateForm.classList.contains('show')) {
-                closeFormWithTransition(inventoryUpdateForm);
+                closeFormWithTransition(inventoryUpdateForm,'inventory-blurred');
             }
         }
     });
