@@ -111,16 +111,16 @@
                 success: function(response) {
                     // Debugging to ensure response contains correct data
                     // Populate the form fields' placeholders with the response data
-                    $('input#name').attr('value', response.name);
-                    $('select#category').val(response.category);
-                    $('input#description').attr('value', response.description);
-                    $('input#quantity').attr('value', response.quantity);
-                    $('input#unit').attr('value', response.unit);
-                    $('input#reorder_level').attr('value', response.reorder_level);
-                    $('input#storage_location').attr('value', response.storage_location);
-                    $('input#expiration_date').attr('value', response.expiration_date.split('T')[0]);
-                    $('input#supplier_name').attr('value', response.supplier_name);
-                    $('input#supplier_contact').attr('value', response.supplier_contact);
+                    $('#inventoryupdateForm #name').attr('value', response.name);
+                    $('#inventoryupdateForm #category').val(response.category);
+                    $('#inventoryupdateForm #description').attr('value', response.description);
+                    $('#inventoryupdateForm #quantity').attr('value', response.quantity);
+                    $('#inventoryupdateForm #unit').attr('value', response.unit);
+                    $('#inventoryupdateForm #reorder_level').attr('value', response.reorder_level);
+                    $('#inventoryupdateForm #storage_location').attr('value', response.storage_location);
+                    $('#inventoryupdateForm #expiration_date').attr('value', response.expiration_date.split('T')[0]);
+                    $('#inventoryupdateForm #supplier_name').attr('value', response.supplier_name);
+                    $('#inventoryupdateForm #supplier_contact').attr('value', response.supplier_contact);
 
                     // $('#inventoryupdateForm').attr('action', '/inventory/patch/' + itemId);
                     $('#inventoryupdateForm').attr('data-value',itemId);
