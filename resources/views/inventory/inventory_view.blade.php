@@ -6,7 +6,7 @@
 @section('content')
 @include('forms.inventory.inventory-add-form')
 @include('forms.inventory.inventory-update-form')
-<div class="container-fluid">
+<div class="container">
     <div class="desktop-inventory d-flex flex-row p-3">
         <div class="col-md-2 d-none flex-column d-md-flex">
             <div class="container-fluid h-100">
