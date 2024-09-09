@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventory; // have to place this first before any other import
+use App\Models\InventoryAction; // have to place this first before any other import
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -40,6 +41,13 @@ class InventoryController extends Controller
 
         // Delete the item
         $item->delete();
+
+        InventoryAction::create([
+            'inventory_id' => $id,
+            'action_type' => 'removed',
+            'performed_by' => auth()->user()->name,
+            'reason_for_action' => 'removed',
+        ]);
 
         // Return a success message
         if ($request->expectsJson()) {
@@ -110,6 +118,13 @@ class InventoryController extends Controller
 
         // Create a new inventory item
         $inventory = Inventory::create($validatedData);
+        $username = auth()->user()->name;
+        InventoryAction::create([
+            'inventory_id' => '1',
+            'action_type' => 'added',
+            'performed_by' => $username,
+            'reason_for_action' => 'initial transaction',
+        ]);
 
         // Check if the request expects a JSON response (like when sent via AJAX)
         if ($request->expectsJson()) {
@@ -122,7 +137,7 @@ class InventoryController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Failed to add inventory item.',
-            ], 500);
+            ], 500);    
         }
 
         // // Fallback for non-AJAX requests (normal form submission)
