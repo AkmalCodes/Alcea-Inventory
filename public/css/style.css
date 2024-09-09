@@ -476,3 +476,51 @@ li{
     display: flex;
     justify-content: center;
 }
+
+
+/* ========= Dashboard desktop styles ========= */
+
+.dashboard-card-container{
+    display:grid !important;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.dashboard-card-container
+
+.dashboard-card{
+    box-shadow:0px 1.5px 3px 1px rgba(7, 92, 62, 0.3);
+    background-color: white;
+    border-radius: 6px;
+    margin:0.75em;
+}
+
+.dashboard-card h5, .dashboard-card p{
+    margin:0.25em;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-5px);
+    position: relative;
+    z-index: 1;
+    transition: transform 0.5s;
+}
+
+.dashboard-table-container{
+    margin:0.75em;
+    box-shadow:0px 1.5px 3px 1px rgba(7, 92, 62, 0.3);
+    border-radius: 6px;
+    background-color: white;
+}
+
+.dashboard-table-container h5{
+    padding:0.5em;
+    margin:0;
+}
+
+.dashboard-table-container{
+    text-align: center;
+}
+
+.dashboard-table-container .card{
+    border:none !important;
+}
