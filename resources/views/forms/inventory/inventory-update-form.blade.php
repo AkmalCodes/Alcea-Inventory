@@ -149,7 +149,7 @@
                 success: function(response) {
                     console.log('Item updated successfully:', response);
                     alert(response.message); // Show success message
-                    closeFormWithTransition(div);
+                    closeFormWithTransition(div,'inventory-blurred');
                 },
                 error: function(response) {
                     if (response.status === 422) { // Validation error
