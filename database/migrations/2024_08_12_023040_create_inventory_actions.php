@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('inventory_actions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('inventory_id')->constrained('inventory');
-            $table->date('date_of_action');
             $table->enum('action_type', ['added', 'removed', 'adjusted']);
-            $table->decimal('quantity_changed',8,2);
+            $table->string('performed_by')->nullable();
+            $table->decimal('quantity_changed',8,2)->nullable()->default(null);
             $table->string('reason_for_action')->nullable();
             $table->timestamps();
         });
