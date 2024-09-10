@@ -186,7 +186,7 @@
     </div>
 </div>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function() { // handles transition for category selections
         $('a[data-value]').on('click', function(event) {
             event.preventDefault();
             var selectedCategory = $(this).data('value');
@@ -210,7 +210,7 @@
         });
         });
     });
-    $(document).ready(function() {
+    $(document).ready(function() { // handles transition for item deletion
         $('.delete-item').on('click', function(event) {
         event.preventDefault();
         var itemId = $(this).data('id');
