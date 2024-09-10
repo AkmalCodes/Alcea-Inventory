@@ -51,7 +51,7 @@
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Reorder Level</span>
                     <input type="number" class="form-control" id="reorder_level" name="reorder_level"
-                        value="Enter Reorder Level" step="0.01">
+                        value="Enter Reorder Level" step="0.1">
                     <span role="alert"><strong id="reorderLevelError"></strong></span>
                 </div>
             </li>
