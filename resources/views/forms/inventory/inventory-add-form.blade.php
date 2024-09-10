@@ -113,25 +113,16 @@
                 success: function(response) {
                     closeFormWithTransition(div,'inventory-blurred');
                     // Set the toast message
-                    $('.toast-body').text('Item added successfully'); // Update toast message
-                    
-                    // Show the toast
-                    var toastEl = document.querySelector('.toast'); // Select the toast element
-                    var toast = new bootstrap.Toast(toastEl); // Initialize the toast
-                    toast.show(); // Show the toast
+                    var message = 'Item added successfully'; // Update toast message
+                    var type = 'inventory-add-success'; //
+                    showToastInventory(message,type);
                     $('#inventoryaddForm')[0].reset(); // Reset the form fields
                 },
                 error: function(response) {
                     if (response.status === 422) { // Validation error
-                        let errors = response.responseJSON.errors;
-                        // Handle validation errors
-                        alert('Validation failed. Please check your input.');
-                        console.log(errors); // Display validation errors in the console
-
-                        // Example of setting errors to specific fields (if needed)
-                        // if (errors.name) {
-                        //     $('#nameError').text(errors.name[0]).show();
-                        // }
+                        var errors = response.responseJSON.errors;
+                        var type = 'inventory-update-success'; //
+                        showToastInventory(errors,type);
                     } else {
                         alert('An error occurred. Please try again.');
                     }
