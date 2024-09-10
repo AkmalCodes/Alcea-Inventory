@@ -7,12 +7,17 @@
     font-size: 0.97em;
 }
 
+html{
+    height: 100%;
+}
 
 body {
     font-family: "Comfortaa", sans-serif;
     width: 100%;
     overflow-x: hidden;
     height: 100%;
+    display: flex;
+    flex-flow: column;
 }
 
 header{
@@ -24,14 +29,17 @@ header{
     */
     position: sticky;
     top: 0;
+    z-index:10;
 }
 
 main{
     flex: 1 1 auto;
+    position:relative;
+    z-index: 1;
 }
 
 footer{
-    flex: 0 1 auto;
+    flex: 0 1 40px;
 }
 
 li{
