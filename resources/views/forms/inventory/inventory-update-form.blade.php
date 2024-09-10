@@ -147,21 +147,18 @@
                     'Accept': 'application/json' // Explicitly tell the server to respond with JSON
                 },
                 success: function(response) {
-                    console.log('Item updated successfully:', response);
-                    alert(response.message); // Show success message
                     closeFormWithTransition(div,'inventory-blurred');
+                   // Set the toast message
+                    var message = 'Item Updated successfully'; // Update toast message
+                    var type = 'inventory-update-success'; //
+                    showToastInventory(message,type);
+                    toast.show(); // Show the toast
                 },
                 error: function(response) {
                     if (response.status === 422) { // Validation error
-                        let errors = response.responseJSON.errors;
-                        // Handle validation errors
-                        alert('Validation failed. Please check your input.');
-                        console.log(errors); // Display validation errors in the console
-
-                        // Example of setting errors to specific fields (if needed)
-                        // if (errors.name) {
-                        //     $('#nameError').text(errors.name[0]).show();
-                        // }
+                        var errors = response.responseJSON.errors;
+                        var type = 'inventory-update-success'; //
+                        showToastInventory(errors,type);
                     } else {
                         alert('An error occurred. Please try again.');
                     }
