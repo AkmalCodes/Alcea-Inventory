@@ -16,7 +16,7 @@
             </div>
             <div class="dashboard-card text-center my-2">
                 <h5>Recently Updated</h5>
-                <p>{{ $recentUpdatedItems->count() }} items updated recently</p>
+                <p>{{ $recentUpdatedItems->total() }} items updated recently</p>
             </div>
         </div>
         <div class="dashboard-table-container col">
@@ -25,7 +25,7 @@
                     <h5>Low Stock Items <strong style="color:rgb(238, 65, 43);">{{ $lowStockItems->count() }}</strong></h5>
                 </div>
                 <div class="card-body">
-                    <table class="table table-borderless">
+                    <table id="lowstockitems" class="table table-borderless">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -36,7 +36,7 @@
                         <tbody>
                             @foreach ($lowStockItems as $item)
                                 <tr>
-                                    <td>{{ $item->name }} <strong>[ {{$item->supplier_name}} ]</strong></td>
+                                    <td>{{ $item->name }} <strong>[ {{ $item->supplier_name }} ]</strong></td>
                                     <td>{{ $item->quantity }}</td>
                                     <td>{{ $item->reorder_level }}</td>
                                 </tr>
@@ -49,10 +49,10 @@
         <div class="dashboard-table-container col mt-4">
             <div class="card">
                 <div class="card-header text-center">
-                    <h5>Recently Updated Items <strong style="color:rgb(238, 65, 43);">{{ $recentUpdatedItems->count() }}</strong></h5>
+                    <h5>Recently Updated Items <strong style="color:rgb(238, 65, 43);">{{ $recentUpdatedItems->total() }}</strong></h5>
                 </div>
                 <div class="card-body">
-                    <table class="table table-borderless">
+                    <table id="recentlyupdateditems" class="table table-borderless">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -61,10 +61,10 @@
                                 <th>Last Updated</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="recent-updated-items">
                             @foreach ($recentUpdatedItems as $item)
                                 <tr>
-                                    <td>{{ $item->inventory->name }} <strong>[ {{$item->inventory->supplier_name}} ]</strong></td>
+                                    <td>{{ $item->inventory->name }} <strong>[ {{ $item->inventory->supplier_name }} ]</strong></td>
                                     <td>{{ $item->performed_by }}</td>
                                     <td>{{ $item->action_type }}</td>
                                     <td>{{ $item->updated_at->format('d/m/Y') }}</td>
@@ -72,9 +72,50 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div id="pagination-links" class="d-flex justify-content-center mt-3">
+                        {{ $recentUpdatedItems->links('pagination::bootstrap-5') }}
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+    $(document).on('click', '.pagination a', function(event) {
+        event.preventDefault(); // Prevent page reload
+        var page = $(this).attr('href').split('page=')[1]; // Get the page number from the link
+
+        // Send AJAX request
+        $.ajax({
+            url: '/dashboard?page=' + page, // Correct route for pagination
+            type: 'GET',
+            success: function(response) {
+                var tableBody = $('#recentlyupdateditems tbody');
+                tableBody.empty(); // Clear the current rows
+
+                // Loop through the items and generate new table rows
+                $.each(response.items, function(index, item) {
+                    var row = '<tr>';
+                    row += '<td>' + item.inventory.name + ' <strong>[' + item.inventory.supplier_name + ']</strong></td>';
+                    row += '<td>' + item.performed_by + '</td>';
+                    row += '<td>' + item.action_type + '</td>';
+                    row += '<td>' + new Date(item.updated_at).toLocaleDateString() + '</td>';
+                    row += '</tr>';
+
+                    tableBody.append(row); // Append each row to the table
+                });
+
+                // Update pagination
+                $('#pagination-links').html(response.pagination);
+            },
+            error: function() {
+                alert('Error loading data.');
+            }
+        });
+    });
+});
+
+</script>
 @endsection
