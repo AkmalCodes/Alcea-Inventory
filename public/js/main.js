@@ -259,6 +259,33 @@ function initializeInventoryForm() {
     });
 }
 
+///////////////////////////// Toasts /////////////////////////////
+
+function showToastInventory(message, type) { // function to handle push notifications dynamically
+    var toastEl = document.getElementById('myToast');
+    var toastBody = toastEl.querySelector('.toast-body');
+
+    // Update the toast message
+    toastBody.textContent = message;
+
+    // Remove any previous background classes (if switching types)
+    toastEl.classList.remove('text-bg-primary', 'text-bg-success', 'text-bg-danger');
+
+    // Add the appropriate background class based on the type
+    if (type === 'inventory-add-success' || type === 'inventory-update-success' || type === 'inventory-delete-success') {
+        toastEl.classList.add('text-bg-success'); // Green background for success
+    } else if (type === 'inventory-add-failed' || type === 'inventory-update-failed' || type === 'inventory-delete-failed') {
+        toastEl.classList.add('text-bg-danger'); // Red background for errors
+    } else {
+        toastEl.classList.add('text-bg-primary'); // Default primary background
+    }
+
+    // Show the toast
+    var toast = new bootstrap.Toast(toastEl);
+    toast.show();
+}
+
+
 
 
 
