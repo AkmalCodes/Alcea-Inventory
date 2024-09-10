@@ -34,7 +34,7 @@
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Quantity</span>
                     <input type="number" class="form-control" id="quantity" name="quantity"
-                        value="{{ old('quantity') }}" required step="0.01">
+                        value="{{ old('quantity') }}" required step="0.1">
                     <span role="alert"><strong id="quantityError"></strong></span>
                 </div>
             </li>
@@ -50,7 +50,7 @@
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Reorder Level</span>
                     <input type="number" class="form-control" id="reorder_level" name="reorder_level"
-                        value="{{ old('reorder_level') }}" step="0.01">
+                        value="{{ old('reorder_level') }}" step="0.1">
                     <span role="alert"><strong id="reorderLevelError"></strong></span>
                 </div>
             </li>
@@ -111,10 +111,14 @@
                     'Accept': 'application/json' // Explicitly tell the server to respond with JSON
                 },
                 success: function(response) {
-                    console.log('Item added successfully:', response);
-                    // Optionally, clear the form or update the UI
-                    alert(response.message); // Display a success message
                     closeFormWithTransition(div,'inventory-blurred');
+                    // Set the toast message
+                    $('.toast-body').text('Item added successfully'); // Update toast message
+                    
+                    // Show the toast
+                    var toastEl = document.querySelector('.toast'); // Select the toast element
+                    var toast = new bootstrap.Toast(toastEl); // Initialize the toast
+                    toast.show(); // Show the toast
                     $('#inventoryaddForm')[0].reset(); // Reset the form fields
                 },
                 error: function(response) {
