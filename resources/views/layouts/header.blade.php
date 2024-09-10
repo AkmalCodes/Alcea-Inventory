@@ -1,4 +1,3 @@
-<header>
     <div class="top-nav-wrapper navbar"> <!-- important to have 'navbar' bootstrap toggler-->
         <div class="container">
             @auth
@@ -163,4 +162,3 @@
             </div>
         </nav>
     </div>
-</header>

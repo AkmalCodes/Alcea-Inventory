@@ -231,7 +231,7 @@
                     
                     // Show the toast
                     var toastEl = document.querySelector('.toast'); // Select the toast element
-                    var toast = new bootstrap.Toast(toastEl); // Initialize the toast
+                    var toast = new bootap.Toast(toastEl); // Initialize the toast
                     toast.show(); // Show the toast
                     
                     // Remove the item from the DOM
