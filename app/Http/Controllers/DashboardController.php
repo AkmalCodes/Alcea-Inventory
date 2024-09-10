@@ -12,9 +12,24 @@ class DashboardController extends Controller
         $this->middleware('auth.guard');
     }
 
-    public function view(){ // function to get relavent information regarding inventory status
+    public function view(Request $request)
+    {
         $totalItems = Inventory::count();
         $lowStockItems = Inventory::whereColumn('quantity', '<', 'reorder_level')->get();
-        $recentUpdatedItems = InventoryAction::where('updated_at', '>=', now()->subDays(7))->with('inventory', function ($query) {$query->withTrashed();})->get(); // use with trashed to get items that are soft deleted in inventory table
-        return view('dashboard.dashboard', compact('totalItems', 'lowStockItems', 'recentUpdatedItems'));    }
+        $recentUpdatedItems = InventoryAction::where('updated_at', '>=', now()->subDays(7))
+            ->with('inventory', function ($query) {
+                $query->withTrashed(); // retrieves data that has been soft deleted or in other words delted_at <> NULL
+            })->paginate(7);
+
+        // If the request is an AJAX call, return the partial view for pagination
+        if ($request->ajax()) {
+            return response()->json([
+                'items' => $recentUpdatedItems->items(), // Just the items' data front end will handle data
+                'pagination' => (string) $recentUpdatedItems->links('pagination::bootstrap-5') // Cast pagination links to string
+            ]);
+        }
+
+        return view('dashboard.dashboard', compact('totalItems', 'lowStockItems', 'recentUpdatedItems'));
+    }
+
 }
