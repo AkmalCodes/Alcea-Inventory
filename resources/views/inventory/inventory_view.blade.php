@@ -7,7 +7,7 @@
 @include('forms.inventory.inventory-add-form')
 @include('forms.inventory.inventory-update-form')
 <div class="container">
-    <div class="desktop-inventory d-flex flex-row p-3">
+    <div class="d-flex flex-row p-3">
         <div class="col-md-2 d-none flex-column d-md-flex">
             <div class="container-fluid h-100">
                 <ul class="inventory-nav">
@@ -226,13 +226,20 @@
                     _token: token
                 },
                 success: function(response) {
-                    alert(response.message);
+                    // Set the toast message
+                    $('.toast-body').text('Item deleted'); // Update toast message
+                    
+                    // Show the toast
+                    var toastEl = document.querySelector('.toast'); // Select the toast element
+                    var toast = new bootstrap.Toast(toastEl); // Initialize the toast
+                    toast.show(); // Show the toast
+                    
                     // Remove the item from the DOM
                     itemRow.fadeOut(300, function() {
                         $(this).remove(); // Remove the element after fade out
                     });
                 },
-                error: function(response) {
+                    error: function(response) {
                     alert('Error deleting item.');
                 }
             });
