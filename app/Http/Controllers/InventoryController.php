@@ -16,7 +16,7 @@ class InventoryController extends Controller
 
     public function view()
     { 
-        $inventoryItems = Inventory::all();
+        $inventoryItems = Inventory::paginate(10);
         // view to display inventory content
         return view('inventory.inventory_view',compact('inventoryItems'));
     }
