@@ -61,7 +61,7 @@ body.inventory-blurred footer {
 .login-form,.register-form{
     visibility: hidden;
     background-color: white;
-    position: absolute;
+    position: fixed;
     padding:2em;
     height: fit-content;
     width: 90%;
@@ -78,7 +78,7 @@ body.inventory-blurred footer {
 .inventory-add-form,.inventory-update-form{ /* placed in main container*/
     visibility: hidden;
     background-color: white;
-    position: absolute;
+    position: fixed;
     padding:0.5em;
     height: fit-content;
     width: 90%;
