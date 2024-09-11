@@ -48,8 +48,8 @@
                             </ul>
                         </div>
                     </nav>
-                    <div id="pagination-links" class="d-flex justify-content-end mt-3">
-                        {{ $inventoryItems->links('pagination::bootstrap-5') }}
+                    <div id="pagination-links" class="d-flex justify-content-end align-items-center mt-1 mb-1">
+                        @include("inventory.partials.custom_pagination") {{-- add the pagination links--}}
                     </div>
                     <div class="inventory-view-desktop container-fluid h-100 d-none d-md-flex  px-0 px-md-auto m-0">                      
                         <table class="w-100 mt-1">

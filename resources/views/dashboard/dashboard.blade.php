@@ -72,9 +72,9 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div id="pagination-links" class="d-flex justify-content-center mt-3">
-                        {{ $recentUpdatedItems->links('pagination::bootstrap-5') }}
-                    </div>
+                    <div id="pagination-links" class="d-flex justify-content-end align-items-center mt-1 mb-1">
+                        @include("dashboard.partials.recentupdateitems_pagination") {{-- add the pagination links--}}
+                    </div>                   
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
                 });
 
                 // Update pagination
-                $('#pagination-links').html(response.pagination);
+                $('#pagination-links').html(response.pagination_recentupdateitems);
             },
             error: function() {
                 alert('Error loading data.');
