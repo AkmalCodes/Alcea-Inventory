@@ -14,9 +14,15 @@ class InventoryController extends Controller
         $this->middleware('auth.guard')->only(['view']); // authenticates user before accessing inventory page  // middleware('auth') is used to authenticate the user before accessing any route that requires authentication.  // The middleware will redirect the user to the login page if they are not authenticated.  // The 'auth' middleware is defined in the Kernel.php file located in the app/Http/Kernel.php file.
     }
 
-    public function view()
+    public function view(Request $request)
     { 
-        $inventoryItems = Inventory::paginate(10);
+        $inventoryItems = Inventory::paginate(5);
+        if ($request->ajax()) { // condition to allow any ajax function to to retrieve this data if called upon
+            return response()->json([
+                'items' => $inventoryItems->items(), // Just the items' data front end will handle data
+                'pagination' => (string) $inventoryItems->links('pagination::bootstrap-5') // Cast pagination links to string
+            ]);
+        }
         // view to display inventory content
         return view('inventory.inventory_view',compact('inventoryItems'));
     }
