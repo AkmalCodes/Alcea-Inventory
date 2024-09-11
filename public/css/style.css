@@ -486,7 +486,7 @@ li{
 }
 
 
-/* ========= Dashboard desktop styles ========= */
+/* =========================== Dashboard desktop styles =========================== */
 
 .dashboard-card-container{
     display:grid !important;
@@ -531,4 +531,33 @@ li{
 
 .dashboard-table-container .card{
     border:none !important;
+}
+
+/* =========================== Pagination styles (bootstrap) =========================== */
+#pagination-links>nav>ul{
+    margin:0;
+    height: fit-content;
+}
+
+.page-link-custom {
+    text-decoration: none !important; /* Remove underline */
+    border:none !important;
+    color:black;
+    font-size: 0.9em;
+    padding-right:0.4em;
+    padding-left:0.4em;
+}
+
+.page-link-custom:hover,  
+.page-link-custom:focus {
+    text-decoration: none !important; /* Ensure no underline on hover or focus */
+    color: rgba(7, 92, 62) !important; /* Maintain color consistency */
+    transform: scale(1.25   );
+    transition: 0.3s;
+}
+
+.active>.page-link-custom{
+    background-color:transparent !important;
+    color:rgba(7, 92, 62);
+    transform:scale(1.25);
 }
