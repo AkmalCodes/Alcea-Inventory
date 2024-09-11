@@ -17,10 +17,11 @@ class InventoryController extends Controller
     public function view(Request $request)
     { 
         $inventoryItems = Inventory::paginate(5);
-        if ($request->ajax()) { // condition to allow any ajax function to to retrieve this data if called upon
+        if ($request->ajax()) {
+            $paginationView = view('inventory.partials.custom_pagination', compact('inventoryItems'))->render(); // Custom pagination view
             return response()->json([
-                'items' => $inventoryItems->items(), // Just the items' data front end will handle data
-                'pagination' => (string) $inventoryItems->links('pagination::bootstrap-5') // Cast pagination links to string
+                'items' =>  $inventoryItems->items(), // Render the items view for AJAX
+                'pagination' => $paginationView, // Use custom pagination
             ]);
         }
         // view to display inventory content

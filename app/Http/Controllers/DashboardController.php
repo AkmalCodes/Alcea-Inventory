@@ -23,9 +23,10 @@ class DashboardController extends Controller
 
         // If the request is an AJAX call, return the partial view for pagination
         if ($request->ajax()) {
+            $recentUpdatedItemsPagination = view('dashboard.partials.recentupdateitems_pagination', compact('recentUpdatedItems'))->render(); // Custom pagination view
             return response()->json([
                 'items' => $recentUpdatedItems->items(), // Just the items' data front end will handle data
-                'pagination' => (string) $recentUpdatedItems->links('pagination::bootstrap-5') // Cast pagination links to string
+                'pagination_recentupdateitems' => $recentUpdatedItemsPagination // Cast pagination links to string
             ]);
         }
 
