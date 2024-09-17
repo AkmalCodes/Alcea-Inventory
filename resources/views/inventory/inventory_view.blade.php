@@ -247,6 +247,7 @@
             }
                 // Update pagination links
                 $('#pagination-links').html(response.pagination);
+                initializeInventoryForm();
             },
             error: function() {
                 alert('Error loading data.');
@@ -283,8 +284,10 @@
                 <td>
                     <div class="container-fluid m-0 p-0 d-flex justify-content-center align-items-center">
                         <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center add-item-quantity" style="background-color: transparent;" data-id="${item.id}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                             </svg>
                         </button>
                         <button type="button" class="delete-item col-4 mt-1 border-0 d-flex justify-content-center align-items-center" data-id="${item.id}" style="background-color: transparent;">
@@ -314,9 +317,10 @@
                             <a href="#"><img src="/images/chicken.png" alt="${item.name}"></a>
                             <div class="row d-flex justify-content-around flex-row w-100">
                                 <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center add-item-quantity" style="background-color: transparent;" data-id="${item.id}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                                     </svg>
                                 </button>
                                 <button type="button" class="delete-item col-4 mt-1 border-0 d-flex justify-content-center align-items-center delete-item" data-id="${item.id}" style="background-color: transparent;">
