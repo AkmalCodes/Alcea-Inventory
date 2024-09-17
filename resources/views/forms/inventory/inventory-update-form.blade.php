@@ -99,7 +99,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('.updateitem-show').on('click', function(event) {
+        $(document).on('click','.updateitem-show',function(event){
+        // $('.updateitem-show').on('click', function(event) {
             event.preventDefault();
 
             var itemId = $(this).data('id');
@@ -124,8 +125,6 @@
 
                     // $('#inventoryupdateForm').attr('action', '/inventory/patch/' + itemId);
                     $('#inventoryupdateForm').attr('data-value',itemId);
-                    // Show the form
-                    $('.inventory-update-form').show();
                 },
                 error: function(response) {
                     alert('Error fetching item data.');
@@ -134,7 +133,8 @@
         });
     });
     $(document).ready(function() {
-        $('#inventoryupdateForm').on('submit', function(e) {
+        $(document).on('submit','#inventoryupdateForm',function(e){
+        // $('#inventoryupdateForm').on('submit', function(e) {
             e.preventDefault(); // Prevent default form submission
             var itemId = $(this).data('value');
             var div = $('.inventory-update-form');
