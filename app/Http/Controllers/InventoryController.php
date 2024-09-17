@@ -23,7 +23,7 @@ class InventoryController extends Controller
             $inventoryItemsQuery->where('category', $request->category);
         }
         // Paginate the filtered query
-        $inventoryItems = $inventoryItemsQuery->paginate(5);
+        $inventoryItems = $inventoryItemsQuery->paginate(10);
         
         if ($request->ajax()) {
             $paginationView = view('inventory.partials.custom_pagination', compact('inventoryItems'))->render(); // Custom pagination view
