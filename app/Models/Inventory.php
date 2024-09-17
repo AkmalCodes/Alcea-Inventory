@@ -33,6 +33,7 @@ class Inventory extends Model
         'expiration_date',
         'supplier_name',
         'supplier_contact',
+        'image' 
     ];
 
     protected $dates = ['deleted_at']; // This will automatically manage the deleted_at column
