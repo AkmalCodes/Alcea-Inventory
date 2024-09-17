@@ -16,7 +16,15 @@ class InventoryController extends Controller
 
     public function view(Request $request)
     { 
-        $inventoryItems = Inventory::paginate(5);
+        $inventoryItemsQuery = Inventory::query();
+
+        // Category filter (if provided in the request)
+        if ($request->has('category') && $request->category !== 'all') {
+            $inventoryItemsQuery->where('category', $request->category);
+        }
+        // Paginate the filtered query
+        $inventoryItems = $inventoryItemsQuery->paginate(5);
+        
         if ($request->ajax()) {
             $paginationView = view('inventory.partials.custom_pagination', compact('inventoryItems'))->render(); // Custom pagination view
             return response()->json([

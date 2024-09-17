@@ -190,184 +190,194 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() { // handles transition for category selections
-        // $('a[data-value]').on('click', function(event) 
-            $(document).on('click', 'a[data-value]', function(event){
-            event.preventDefault();
-            var selectedCategory = $(this).data('value');
+    $(document).ready(function() {
+    let filters = {
+        category: 'all',  // Default category
+        storageLocation: '', // Placeholder for future storage location filter
+        lowStock: false, // Placeholder for low stock filter
+        page: 1           // Default page
+    };
 
-            // Show or hide items based on the selected category
-            $('.inventory-view-desktop-item').each(function() {
-                var itemCategory = $(this).data('category');
-                if (selectedCategory === 'all' || itemCategory === selectedCategory) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-            $('.inventory-view-mobile-item').each(function() {
-            var itemCategory = $(this).data('category');
-            if (selectedCategory === 'all' || itemCategory === selectedCategory) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-        });
+    // Handles category selection
+    $(document).on('click', 'a[data-value]', function(event) {
+        event.preventDefault();
+        filters.category = $(this).data('value') || 'all';  // Update category filter
+        filters.page = 1;  // Reset to page 1 when a new filter is applied
+        loadInventory(filters);
     });
-    $(document).ready(function() { // handles transition for item deletion
-        // $('.delete-item').on('click', function(event) {// use only for static elements
-        $(document).on('click', '.delete-item', function(event){ // used for event delegation, so it handles dynamic elements
-            event.preventDefault();
-            var itemId = $(this).data('id');
-            var token = '{{ csrf_token() }}';
-            var itemRow = $(this).closest('.inventory-view-desktop-item, .inventory-view-mobile-item'); // Adjust this selector to target the correct item row
 
-            if (confirm('Are you sure you want to delete this item?')) {
-                $.ajax({
-                    url: '/inventory/delete/' + itemId,
-                    type: 'DELETE',
-                    dataType:'json',
-                    data: {
-                        _token: token
-                    },
-                    success: function(response) {
-                        var message = 'Item deleted successfully'; // Update toast message
-                        var type = 'inventory-delete-success'; //
-                        showToastInventory(message,type);
-                        itemRow.fadeOut(300, function() {
-                            $(this).remove(); // Remove the element after fade out
-                        });
-                    },
-                    error: function(response) {
-                        alert('Error deleting item.');
-                    }
+    // Handles pagination
+    $(document).on('click', '.pagination a', function(event) {
+        event.preventDefault();
+        filters.page = $(this).attr('href').split('page=')[1]; // Get the page number
+        loadInventory(filters); // Reload inventory with the updated page
+    });
+
+    // Handles dynamic filter application (for future filters like storage location, low stock, etc.)
+    $(document).on('change', '.filter-select', function(event) {
+        let filterType = $(this).data('filter-type'); // E.g., 'storageLocation' or 'lowStock'
+        let filterValue = $(this).val();
+
+        filters[filterType] = filterValue; // Update the relevant filter
+        filters.page = 1;  // Reset to page 1
+        loadInventory(filters); // Reload with updated filters
+    });
+
+    // Function to load inventory based on filters
+    function loadInventory(filters) {
+        $.ajax({
+            url: '/inventory',
+            type: 'GET',
+            data: filters,  // Send all filters as query parameters
+            success: function(response) {
+                // Clear current table and mobile view
+                $('.inventory-view-desktop tbody').empty();
+                $('.inventory-view-mobile').empty();
+
+                // Append desktop and mobile rows with the new data
+                $.each(response.items, function(index, item) {
+                    appendDesktopRow(item);
+                    appendMobileRow(item);
                 });
+
+                // Update pagination links
+                $('#pagination-links').html(response.pagination);
+            },
+            error: function() {
+                alert('Error loading data.');
             }
-        })   
-    });
-    $(document).ready(function() { // handles pagination of inventory items
-        $(document).on('click', '.pagination a', function(event) {
-            event.preventDefault();
-            var page = $(this).attr('href').split('page=')[1]; // Get the page number from the clicked link
+        });
+    }
 
+    // Function to append desktop row
+    function appendDesktopRow(item) {
+        let desktopRow = `
+            <tr class="inventory-view-desktop-item" data-category="${item.category}">
+                <td>
+                    <a href="/inventory/${item.id}">
+                        <div class="col-6 d-flex justify-content-center align-items-center pe-1 ps-1">
+                            <img src="/images/chicken.png" alt="${item.name}">
+                        </div>
+                        <div class="col-6" style="text-align: left;">
+                            <span>${item.name}</span>
+                        </div>
+                    </a>
+                </td>
+                <td>
+                    <ul>
+                        <li><p>Supplier:</p></li>
+                        <li><p>${item.supplier_name}</p></li>
+                        <li><p>Quantity:</p></li>
+                        <li><p>${item.quantity} ${item.unit}</p></li>
+                        <li><p>Category:</p></li>
+                        <li><p>${item.category}</p></li>
+                    </ul>
+                </td>
+                <td>${item.quantity}</td>
+                <td>${new Date(item.updated_at).toLocaleDateString()}</td>
+                <td>
+                    <div class="container-fluid m-0 p-0 d-flex justify-content-center align-items-center">
+                        <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center add-item-quantity" style="background-color: transparent;" data-id="${item.id}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                            </svg>
+                        </button>
+                        <button type="button" class="delete-item col-4 mt-1 border-0 d-flex justify-content-center align-items-center" data-id="${item.id}" style="background-color: transparent;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </button>
+                        <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center updateitem-show" data-id="${item.id}" style="background-color: transparent;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </td>
+            </tr>`;
+        $('.inventory-view-desktop tbody').append(desktopRow);
+    }
+
+    // Function to append mobile row
+    function appendMobileRow(item) {
+        let mobileRow = `
+            <div class="inventory-view-mobile-item" data-category="${item.category}">
+                <div class="top-inventory-view d-flex flex-row w-100 align-items-center">
+                    <div class="row">
+                        <div class="left col-4 d-flex flex-column justify-content-center align-items-center ps-3">
+                            <a href="#"><img src="/images/chicken.png" alt="${item.name}"></a>
+                            <div class="row d-flex justify-content-around flex-row w-100">
+                                <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center add-item-quantity" style="background-color: transparent;" data-id="${item.id}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                    </svg>
+                                </button>
+                                <button type="button" class="delete-item col-4 mt-1 border-0 d-flex justify-content-center align-items-center delete-item" data-id="${item.id}" style="background-color: transparent;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                    </svg>
+                                </button>
+                                <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center updateitem-show" data-id="${item.id}" style="background-color: transparent;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="middle col-8 p-0">
+                            <ul>
+                                <li><p>Ingredient:</p></li>
+                                <li><p>${item.name}</p></li>
+                                <li><p>Supplier:</p></li>
+                                <li><p>${item.supplier_name}</p></li>
+                                <li><p>Quantity:</p></li>
+                                <li><p>${item.quantity}</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-inventory-view d-flex flex-row w-100 align-items-center">
+                    <div class="left col-4">${item.category}</div>
+                    <div class="right col-4">${new Date(item.updated_at).toLocaleDateString()}</div>
+                    <div class="right col-4">Stocked</div>
+                </div>
+            </div>`;
+        $('.inventory-view-mobile').append(mobileRow);
+    }
+
+    // Handles transition for item deletion
+    $(document).on('click', '.delete-item', function(event) {
+        event.preventDefault();
+        var itemId = $(this).data('id');
+        var token = '{{ csrf_token() }}';
+        var itemRow = $(this).closest('.inventory-view-desktop-item, .inventory-view-mobile-item'); // Adjust this selector to target the correct item row
+
+        if (confirm('Are you sure you want to delete this item?')) {
             $.ajax({
-                url: '/inventory?page=' + page,
-                type: 'GET',
-                success: function(response) {
-                    // Clear the current table body
-                    $('.inventory-view-desktop tbody tr:not(:first)').empty(); 
-                    $('.inventory-view-mobile').empty(); // Assuming mobile view as well
-
-                    // Loop through response.items and build rows for desktop and mobile view
-                    $.each(response.items, function(index, item) {
-                        // Desktop View Rows
-                        var desktopRow = `
-                            <tr class="inventory-view-desktop-item" data-category="${item.category}">
-                                <td>
-                                    <a href="/inventory/${item.id}">
-                                        <div class="col-6 d-flex justify-content-center align-items-center pe-1 ps-1">
-                                            <img src="/images/chicken.png" alt="${item.name}">
-                                        </div>
-                                        <div class="col-6" style="text-align: left;">
-                                            <span>${item.name}</span>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td>
-                                    <ul>
-                                        <li><p>Supplier:</p></li>
-                                        <li><p>${item.supplier_name}</p></li>
-                                        <li><p>Quantity:</p></li>
-                                        <li><p>${item.quantity} ${item.unit}</p></li>
-                                        <li><p>Category:</p></li>
-                                        <li><p>${item.category}</p></li>
-                                    </ul>
-                                </td>
-                                <td>${item.quantity}</td>
-                                <td>${new Date(item.updated_at).toLocaleDateString()}</td>
-                                <td>
-                                    <div class="container-fluid m-0 p-0 d-flex justify-content-center align-items-center">
-                                        <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center add-item-quantity" style="background-color: transparent;" data-id="${item.id}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                                            </svg>
-                                        </button>
-                                        <button type="button" class="delete-item col-4 mt-1 border-0 d-flex justify-content-center align-items-center delete-item" data-id="${item.id}" style="background-color: transparent;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                            </svg>
-                                        </button>
-                                        <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center updateitem-show" data-id="${item.id}" style="background-color: transparent;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>`;
-
-
-                        $('.inventory-view-desktop tbody').append(desktopRow);
-
-                        // Mobile View Rows
-                        var mobileRow = `
-                            <div class="inventory-view-mobile-item" data-category="${item.category}">
-                                <div class="top-inventory-view d-flex flex-row w-100 align-items-center">
-                                    <div class="row">
-                                        <div class="left col-4 d-flex flex-column justify-content-center align-items-center ps-3">
-                                            <a href="#"><img src="/images/chicken.png" alt="${item.name}"></a>
-                                            <div class="row d-flex justify-content-around flex-row w-100">
-                                               <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center add-item-quantity" style="background-color: transparent;" data-id="${item.id}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                                                    </svg>
-                                                </button>
-                                                <button type="button" class="delete-item col-4 mt-1 border-0 d-flex justify-content-center align-items-center delete-item" data-id="${item.id}" style="background-color: transparent;">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                    </svg>
-                                                </button>
-                                                <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center updateitem-show" data-id="${item.id}" style="background-color: transparent;">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="middle col-8 p-0">
-                                            <ul>
-                                                <li><p>Ingredient:</p></li>
-                                                <li><p>${item.name}</p></li>
-                                                <li><p>Supplier:</p></li>
-                                                <li><p>${item.supplier_name}</p></li>
-                                                <li><p>Quantity:</p></li>
-                                                <li><p>${item.quantity}</p></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bottom-inventory-view d-flex flex-row w-100 align-items-center">
-                                    <div class="left col-4">${item.category}</div>
-                                    <div class="right col-4">${new Date(item.updated_at).toLocaleDateString()}</div>
-                                    <div class="right col-4">Stocked</div>
-                                </div>
-                            </div>`;
-
-                        // Append mobile row
-                        $('.inventory-view-mobile').append(mobileRow);
-                    });
-
-                    // Update pagination links
-                    $('#pagination-links').html(response.pagination);
+                url: '/inventory/delete/' + itemId,
+                type: 'DELETE',
+                dataType: 'json',
+                data: {
+                    _token: token
                 },
-                error: function() {
-                    alert('Error loading data.');
+                success: function(response) {
+                    var message = 'Item deleted successfully'; // Update toast message
+                    var type = 'inventory-delete-success'; //
+                    showToastInventory(message, type);
+                    itemRow.fadeOut(300, function() {
+                        $(this).remove(); // Remove the element after fade out
+                    });
+                },
+                error: function(response) {
+                    alert('Error deleting item.');
                 }
             });
-        });
+        }
     });
+});
+
 </script>
 @endsection
