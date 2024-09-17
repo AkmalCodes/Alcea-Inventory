@@ -234,12 +234,17 @@
                 $('.inventory-view-desktop tbody').empty();
                 $('.inventory-view-mobile').empty();
 
-                // Append desktop and mobile rows with the new data
+                if (response.items.length === 0) {
+                    // If no items, show a message
+                    $('.inventory-view-desktop tbody').append('<tr><td colspan="5"><h6>No items available...</h6></td></tr>');
+                    $('.inventory-view-mobile').append('<div class="col-12"><h6>No items available...</h6></div>');
+                } else {
+                // Append desktop and mobile rows with the new data if items exist
                 $.each(response.items, function(index, item) {
                     appendDesktopRow(item);
                     appendMobileRow(item);
                 });
-
+            }
                 // Update pagination links
                 $('#pagination-links').html(response.pagination);
             },
