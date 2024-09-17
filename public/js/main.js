@@ -1,13 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.querySelector('.login-form');
+    const registerForm = document.querySelector('.register-form');
+
+    // Only call closeLoginForm if loginForm exists
+    if (loginForm) {
+        closeLoginForm();
+        initializeLoginForm(); // Initialize login form only if it exists
+    }
+
+    // Only call closeRegisterForm if registerForm exists
+    if (registerForm) {
+        closeRegisterForm();
+        initializeRegisterForm(); // Initialize register form only if it exists
+    }
+
+    // Initialize dropdowns and other components
     initializeDropdownMenus();
     initializeSubmenuItems();
     initializeBackButtons();
-    initializeLoginForm();
-    initializeRegisterForm();
     initializeInventoryForm();
     closeInventoryForm();
-    closeRegisterForm();
-    closeLoginForm();
     closeMobileMenu();
     closeDesktopDropdown();
 });
@@ -57,9 +69,11 @@ function closeMobileMenu() {
         const isClickInsideLogoutForm = event.target.closest('.logout-form'); // Handling logout form clicks
     
         // If either login or register form is open, do nothing
-        if (loginForm.classList.contains('show') || registerForm.classList.contains('show') ){
-            return;
-        } 
+        if(loginForm || registerForm){ // make sure 
+            if (loginForm.classList.contains('show') || registerForm.classList.contains('show') ){
+                return;
+            } 
+        }
     
         // If mobile menu is open and neither login nor register forms are open
         if (mobileMenu.classList.contains('show') && 
