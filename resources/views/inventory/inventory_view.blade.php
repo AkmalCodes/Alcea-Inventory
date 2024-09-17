@@ -53,7 +53,7 @@
                     </div>
                     <div class="inventory-view-desktop container-fluid h-100 d-none d-md-flex  px-0 px-md-auto m-0">                      
                         <table class="w-100 mt-1">
-                            <tr>
+                            <tr class="inventory-desktop-header">
                                 <th>Product</th>
                                 <th>Information</th>
                                 <th>Quantity</th>
@@ -191,7 +191,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() { // handles transition for category selections
-        $('a[data-value]').on('click', function(event) {
+        // $('a[data-value]').on('click', function(event) 
+            $(document).on('click', 'a[data-value]', function(event){
             event.preventDefault();
             var selectedCategory = $(this).data('value');
 
@@ -215,11 +216,12 @@
         });
     });
     $(document).ready(function() { // handles transition for item deletion
-        $('.delete-item').on('click', function(event) {
-        event.preventDefault();
-        var itemId = $(this).data('id');
-        var token = '{{ csrf_token() }}';
-        var itemRow = $(this).closest('.inventory-view-desktop-item, .inventory-view-mobile-item'); // Adjust this selector to target the correct item row
+        // $('.delete-item').on('click', function(event) {// use only for static elements
+        $(document).on('click', '.delete-item', function(event){ // used for event delegation, so it handles dynamic elements
+            event.preventDefault();
+            var itemId = $(this).data('id');
+            var token = '{{ csrf_token() }}';
+            var itemRow = $(this).closest('.inventory-view-desktop-item, .inventory-view-mobile-item'); // Adjust this selector to target the correct item row
 
             if (confirm('Are you sure you want to delete this item?')) {
                 $.ajax({
@@ -242,7 +244,7 @@
                     }
                 });
             }
-        });
+        })   
     });
     $(document).ready(function() { // handles pagination of inventory items
         $(document).on('click', '.pagination a', function(event) {
@@ -254,7 +256,7 @@
                 type: 'GET',
                 success: function(response) {
                     // Clear the current table body
-                    $('.inventory-view-desktop tbody').empty();
+                    $('.inventory-view-desktop tbody tr:not(:first)').empty(); 
                     $('.inventory-view-mobile').empty(); // Assuming mobile view as well
 
                     // Loop through response.items and build rows for desktop and mobile view
@@ -306,22 +308,7 @@
                                 </td>
                             </tr>`;
 
-                        var dekstopRowHeader = `
-                            <tr>
-                                <th>Product</th>
-                                <th>Information</th>
-                                <th>Quantity</th>
-                                <th>Last Updated</th>
-                                <th class="d-none d-md-block">Actions</th>
-                            </tr>
-                            `;
 
-                        // Append desktop row
-                        if(i==0){
-                            $('.inventory-view-desktop tbody').append(dekstopRowHeader);
-                        }else{
-                            continue;   
-                        }
                         $('.inventory-view-desktop tbody').append(desktopRow);
 
                         // Mobile View Rows
