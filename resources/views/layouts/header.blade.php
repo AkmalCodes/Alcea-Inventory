@@ -90,7 +90,7 @@
                 <ul class="mobile-menu-list">
                     @auth
                     <li>
-                        <a href="#"><span class="mt-1 me-2">Dashboard</span></a>
+                        <a href="{{ route('dashboard.dashboard_view') }}"><span class="mt-1 me-2">Dashboard</span></a>
                     </li>
                     <li>
                         <a href="{{ route('inventory.inventory_view') }}"><span class="mt-1 me-2">Inventory</span></a>
@@ -108,7 +108,7 @@
                                 </button>
                                 <h6 class="submenu-title mx-auto" align="center">Inventory</h6>
                             </div>
-                            <li><a href="#">Inventory Dashboard</a></li>
+                            <li><a href="{{ route('dashboard.dashboard_view') }}">Inventory Dashboard</a></li>
                             <li><a href="#">Item 3.2</a></li>
                             <li><a href="#">Item 3.3</a></li>
                         </ul>
