@@ -231,6 +231,7 @@
             data: filters,  // Send all filters as query parameters
             success: function(response) {
                 // Clear current table and mobile view
+                let i = 0;
                 $('.inventory-view-desktop tbody').empty();
                 $('.inventory-view-mobile').empty();
 
@@ -241,8 +242,13 @@
                 } else {
                 // Append desktop and mobile rows with the new data if items exist
                 $.each(response.items, function(index, item) {
+                    if(i == 0){
+                        appendDestopRowHeader();
+                    }
                     appendDesktopRow(item);
                     appendMobileRow(item);
+                    i++;
+                    
                 });
             }
                 // Update pagination links
@@ -253,6 +259,20 @@
                 alert('Error loading data.');
             }
         });
+    }
+
+    function appendDestopRowHeader(){
+        let desktopRowHeader = `
+            <tr class="inventory-desktop-header">
+                <th>Product</th>
+                <th>Information</th>
+                <th>Quantity</th>
+                <th>Last Updated</th>
+                <th class="d-none d-md-block">Actions</th>
+            </tr>
+        `;
+        $('.inventory-view-desktop tbody').append(desktopRowHeader);
+
     }
 
     // Function to append desktop row
