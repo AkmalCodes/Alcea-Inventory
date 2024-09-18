@@ -1,13 +1,18 @@
 <div class="inventory-add-form">
-    <form id="inventoryaddForm" method="POST" action="{{ route('inventory.store') }}">
+    <form id="inventoryaddForm" method="POST" action="{{ route('inventory.store') }}" enctype="multipart/form-data">
         @csrf
         <h3 class="form-title">Add Inventory Item</h3>
         <ul>
             <li class="nav-item">
+                <div class="input-group d-flex">
+                    <input type="file" class="form-control" id="image" name="image" required>
+                    {{-- <label class="input-group-text" for="inputGroupFile02">Upload</label> --}}
+                </div>
+            </li>
+            <li class="nav-item">
                 <div class="input-group d-flex ">
                     <span class="input-group-text" id="basic-addon1">Name</span>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"
-                        required>
+                    <input type="text" class="form-control" id="name" name="name" required>
                     <span role="alert"><strong id="nameError"></strong></span>
                 </div>
             </li>
@@ -100,29 +105,32 @@
     $(document).ready(function() {
         $('#inventoryaddForm').on('submit', function(e) {
             e.preventDefault(); // Prevent default form submission
+
             var div = $('.inventory-add-form');
+            var formData = new FormData(this); // Use FormData to include file inputs
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route('inventory.store') }}',
-                data: $(this).serialize(), // Serialize the form data
+                url: 'inventory/',
+                data: formData, // Pass the FormData object instead of serialized data
                 dataType: 'json', // Set the expected response type to JSON
+                processData: false, // processData, Don't process the FormData --> this is important to tell the ajax function not to process the data as by default it will into string format which will corrupt the image
+                contentType: false, // Don't set the content-type header, let jQuery set it
                 headers: {
                     'Accept': 'application/json' // Explicitly tell the server to respond with JSON
                 },
                 success: function(response) {
                     closeFormWithTransition(div,'inventory-blurred');
-                    // Set the toast message
                     var message = 'Item added successfully'; // Update toast message
                     var type = 'inventory-add-success'; //
-                    showToastInventory(message,type);
+                    showToastInventory(message, type);
                     $('#inventoryaddForm')[0].reset(); // Reset the form fields
                 },
                 error: function(response) {
                     if (response.status === 422) { // Validation error
                         var errors = response.responseJSON.errors;
                         var type = 'inventory-update-success'; //
-                        showToastInventory(errors,type);
+                        showToastInventory(errors, type);
                     } else {
                         alert('An error occurred. Please try again.');
                     }
@@ -130,4 +138,5 @@
             });
         });
     });
+
 </script>
