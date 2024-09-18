@@ -8,7 +8,7 @@
 @include('forms.inventory.inventory-update-form')
 <div class="container">
     <div class="desktop-inventory d-flex flex-row p-3">
-        <div class="col-md-2 d-none flex-column d-md-flex">
+        {{-- <div class="col-md-2 d-none flex-column d-md-flex">
             <div class="container-fluid h-100">
                 <ul class="inventory-nav">
                     <li><a href="#">front desk</a></li>
@@ -16,8 +16,8 @@
                     <li><a href="#">dry kitchen</a></li>
                 </ul>
             </div>
-        </div>
-        <div class="col-12 col-md-10 d-flex flex-column justify-content-start">
+        </div> --}}
+        <div class="col-12 col-md-12 d-flex flex-column justify-content-start">
             <div class="inventory-view">
                 <div class="col-12">
                     <div class="container-fluid  px-0 px-md-auto m-0">
@@ -282,7 +282,7 @@
                 <td>
                     <a href="/inventory/${item.id}">
                         <div class="col-6 d-flex justify-content-center align-items-center pe-1 ps-1">
-                            <img src="/images/chicken.png" alt="${item.name}">
+                            <img src="/${item.image ? item.image : 'images/chicken.png'}" alt="${item.name}">
                         </div>
                         <div class="col-6" style="text-align: left;">
                             <span>${item.name}</span>
@@ -334,7 +334,7 @@
                 <div class="top-inventory-view d-flex flex-row w-100 align-items-center">
                     <div class="row">
                         <div class="left col-4 d-flex flex-column justify-content-center align-items-center ps-3">
-                            <a href="#"><img src="/images/chicken.png" alt="${item.name}"></a>
+                            <a href="#"><img src="/${item.image ? item.image : 'images/chicken.png'}" alt="${item.name}"></a>
                             <div class="row d-flex justify-content-around flex-row w-100">
                                 <button class="col-4 mt-1 border-0 d-flex justify-content-center align-items-center add-item-quantity" style="background-color: transparent;" data-id="${item.id}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
