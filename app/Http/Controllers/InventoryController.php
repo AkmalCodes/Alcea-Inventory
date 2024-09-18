@@ -56,13 +56,8 @@ class InventoryController extends Controller
 
         // Delete the item
         $item->delete();
-
-        InventoryAction::create([
-            'inventory_id' => $id,
-            'action_type' => 'removed',
-            'performed_by' => auth()->user()->name,
-            'reason_for_action' => 'removed',
-        ]);
+        $username = auth()->user()->name;
+        $this->recordAction($id,  'removed', $username, 'deleted');
 
         // Return a success message
         if ($request->expectsJson()) {
@@ -96,9 +91,19 @@ class InventoryController extends Controller
 
         // Find the existing inventory item by ID
         $inventory = Inventory::findOrFail($id);
+        $oldQuantity = $inventory->quantity;
 
         // Update the inventory item with the validated data
         $inventory->update($validatedData);
+        $username = auth()->user()->name;
+
+        if($validatedData['quantity'] > $oldQuantity){
+            $this->recordAction($id, 'update', $username, 'added quantity');
+        }
+
+        if($validatedData['quantity'] < $oldQuantity){
+            $this->recordAction($id, 'update', $username, 'reduced quantity');
+        }
 
         // Check if the request expects a JSON response
         if ($request->expectsJson()) {
@@ -130,16 +135,13 @@ class InventoryController extends Controller
             'supplier_name' => 'nullable|string|max:255',
             'supplier_contact' => 'nullable|string|max:255',
         ]);
-
         // Create a new inventory item
         $inventory = Inventory::create($validatedData);
+        $id = $inventory->id;  // Get the created inventory ID
         $username = auth()->user()->name;
-        InventoryAction::create([
-            'inventory_id' => '1',
-            'action_type' => 'added',
-            'performed_by' => $username,
-            'reason_for_action' => 'initial transaction',
-        ]);
+
+        // Call the recordAction function to log the inventory action
+        $this->recordAction($id, 'added', $username, 'initial transaction');
 
         // Check if the request expects a JSON response (like when sent via AJAX)
         if ($request->expectsJson()) {
@@ -154,9 +156,15 @@ class InventoryController extends Controller
                 'message' => 'Failed to add inventory item.',
             ], 500);    
         }
+    }
 
-        // // Fallback for non-AJAX requests (normal form submission)
-        // return redirect()->route('inventory.view')->with('success', 'Inventory item added successfully!');
+    public function recordAction($id,$action,$user,$reasonofaction){
+        InventoryAction::create([
+            'inventory_id' => $id,
+            'action_type' => $action,
+            'performed_by' => $user,
+            'reason_for_action' => $reasonofaction,
+        ]);
     }
 
 }
