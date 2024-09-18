@@ -289,6 +289,7 @@ li{
 
 .inventory-nav>li>a:hover {
     font-weight: bolder;
+    transform:scale(1.2);
     color: rgb(7, 92, 62);
 }
 
@@ -313,11 +314,14 @@ li{
 .sub-inventory-nav>li>a {
     text-decoration: none;
     color: inherit;
+    opacity: 0.8;
     transition: 0.2s ease;
 }
 
 .sub-inventory-nav>li>a:hover {
     font-weight: bolder;
+    transform:scale(1.2);
+    opacity: 1;
     color: rgb(7, 92, 62);
 }
 
@@ -337,6 +341,10 @@ li{
 
 .inventory-view-desktop>table td{
     padding: 0.5em;
+}
+
+.inventory-view-desktop>table td:first-child{
+    width: 25%;
 }
 
 .inventory-view-desktop ul{
