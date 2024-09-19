@@ -39,55 +39,49 @@
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Quantity</span>
                     <input type="number" class="form-control" id="quantity" name="quantity"
-                        value="{{ old('quantity') }}" required step="0.1">
+                         required step="0.1">
                     <span role="alert"><strong id="quantityError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Unit</span>
-                    <input type="text" class="form-control" id="unit" name="unit" value="{{ old('unit') }}"
-                        required>
+                    <input type="text" class="form-control" id="unit" name="unit" required>
                     <span role="alert"><strong id="unitError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Reorder Level</span>
-                    <input type="number" class="form-control" id="reorder_level" name="reorder_level"
-                        value="{{ old('reorder_level') }}" step="0.1">
+                    <input type="number" class="form-control" id="reorder_level" name="reorder_level" step="0.1">
                     <span role="alert"><strong id="reorderLevelError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Storage Location</span>
-                    <input type="text" class="form-control" id="storage_location" name="storage_location"
-                        value="{{ old('storage_location') }}">
+                    <input type="text" class="form-control" id="storage_location" name="storage_location">
                     <span role="alert"><strong id="storageLocationError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Expiration Date</span>
-                    <input type="date" class="form-control" id="expiration_date" name="expiration_date"
-                        value="{{ old('expiration_date') }}">
+                    <input type="date" class="form-control" id="expiration_date" name="expiration_date">
                     <span role="alert"><strong id="expirationDateError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Supplier Name</span>
-                    <input type="text" class="form-control" id="supplier_name" name="supplier_name"
-                        value="{{ old('supplier_name') }}">
+                    <input type="text" class="form-control" id="supplier_name" name="supplier_name">
                     <span role="alert"><strong id="supplierNameError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Supplier Contact</span>
-                    <input type="text" class="form-control" id="supplier_contact" name="supplier_contact"
-                        value="{{ old('supplier_contact') }}">
+                    <input type="text" class="form-control" id="supplier_contact" name="supplier_contact">
                     <span role="alert"><strong id="supplierContactError"></strong></span>
                 </div>
             </li>
