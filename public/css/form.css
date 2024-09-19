@@ -103,6 +103,10 @@ body.inventory-blurred footer {
     margin:0.5em 0.5em;
 }
 
+.inventory-update-form ul li:first-child{
+    grid-column: span 2 ;
+}
+
 .inventory-add-form div,.inventory-update-form div{
     width:100% ;
 }
@@ -169,4 +173,16 @@ body.inventory-blurred footer {
 
 .form-title{
     text-align: center;
+}
+
+/* ==================================== inventory update form styles ==================================== */
+
+#image-update{
+    width:125px;
+    height: auto;
+    border-radius: 10px;
+}
+
+#image-update + input{
+    width: 100%;
 }
