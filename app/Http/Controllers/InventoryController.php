@@ -87,7 +87,14 @@ class InventoryController extends Controller
             'expiration_date' => 'nullable|date',
             'supplier_name' => 'nullable|string|max:255',
             'supplier_contact' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:2048',
         ]);
+
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $validatedData['image'] = 'images/'.$imageName;
+        }
 
         // Find the existing inventory item by ID
         $inventory = Inventory::findOrFail($id);
@@ -132,9 +139,16 @@ class InventoryController extends Controller
             'reorder_level' => 'nullable|numeric|min:0',
             'storage_location' => 'nullable|string|max:255',
             'expiration_date' => 'nullable|date',
-            'supplier_name' => 'nullable|string|max:255',
+            'supplier_name' => 'nullable|string|max:255',   
             'supplier_contact' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:2048',
         ]);
+        // Handle image upload if present
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $validatedData['image'] = 'images/'.$imageName;
+        }
         // Create a new inventory item
         $inventory = Inventory::create($validatedData);
         $id = $inventory->id;  // Get the created inventory ID
