@@ -1,9 +1,16 @@
 <div class="inventory-update-form">
-    <form id="inventoryupdateForm" method="POST" action="" data-value="">
+    <form id="inventoryupdateForm" method="POST" action="" data-value="" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <h3 class="form-title">Update Inventory Item</h3>
         <ul>
+            <li class="nav-item">
+                <div class="input-group d-flex flex-column justify-center align-items-center">
+                    <img class="mb-3" src="" alt="" id="image-update">
+                    <input type="file" class="form-control" id="image" name="image">
+                    {{-- <label class="input-group-text" for="inputGroupFile02">Upload</label> --}}
+                </div>
+            </li>
             <li class="nav-item">
                 <div class="input-group d-flex ">
                     <span class="input-group-text" id="basic-addon1">Name</span>
@@ -112,6 +119,7 @@
                 success: function(response) {
                     // Debugging to ensure response contains correct data
                     // Populate the form fields' placeholders with the response data
+                    $('#inventoryupdateForm #image-update').attr('src', response.image);
                     $('#inventoryupdateForm #name').attr('value', response.name);
                     $('#inventoryupdateForm #category').val(response.category);
                     $('#inventoryupdateForm #description').attr('value', response.description);
@@ -133,32 +141,34 @@
         });
     });
     $(document).ready(function() {
-        $(document).on('submit','#inventoryupdateForm',function(e){
-        // $('#inventoryupdateForm').on('submit', function(e) {
+        $(document).on('submit', '#inventoryupdateForm', function(e) {
             e.preventDefault(); // Prevent default form submission
-            var itemId = $(this).data('value');
+            var itemId = $(this).data('value'); // Ensure this `data-value` is set properly with the ID
             var div = $('.inventory-update-form');
+            var formData = new FormData(this); // Use FormData constructor (lowercase "f")
+            
             $.ajax({
-                type: 'PATCH',
-                url: '/inventory/patch/' + itemId,
-                data: $(this).serialize(), // Serialize the form data
-                dataType: 'json', // Set the expected response type to JSON
+                type: 'POST', // Even though you're using PATCH, you need to use POST and Laravel will spoof the method
+                url: '/inventory/patch/' + itemId, // Make sure this URL is correct
+                data: formData,
+                processData: false, // Important for sending FormData
+                contentType: false, // Important for sending FormData
+                dataType: 'json',
                 headers: {
-                    'Accept': 'application/json' // Explicitly tell the server to respond with JSON
+                    'Accept': 'application/json'
                 },
                 success: function(response) {
-                    closeFormWithTransition(div,'inventory-blurred');
-                   // Set the toast message
-                    var message = 'Item Updated successfully'; // Update toast message
-                    var type = 'inventory-update-success'; //
-                    showToastInventory(message,type);
-                    toast.show(); // Show the toast
+                    // Success logic
+                    closeFormWithTransition(div, 'inventory-blurred');
+                    var message = 'Item updated successfully'; // Update toast message
+                    var type = 'inventory-update-success';
+                    showToastInventory(message, type);
                 },
                 error: function(response) {
-                    if (response.status === 422) { // Validation error
+                    if (response.status === 422) {
                         var errors = response.responseJSON.errors;
-                        var type = 'inventory-update-success'; //
-                        showToastInventory(errors,type);
+                        var type = 'inventory-update-error';
+                        showToastInventory(errors, type);
                     } else {
                         alert('An error occurred. Please try again.');
                     }
