@@ -16,11 +16,16 @@ class InventoryController extends Controller
 
     public function view(Request $request)
     { 
-        $inventoryItemsQuery = Inventory::query();
+        $inventoryItemsQuery = Inventory::query(); // dynamic query builder so it can be changed on other lines
 
         // Category filter (if provided in the request)
         if ($request->has('category') && $request->category !== 'all') {
             $inventoryItemsQuery->where('category', $request->category);
+        }
+
+        if ($request->has('searchQuery') && !empty($request->searchQuery)) {// Apply search query filter
+            $searchQuery = $request->searchQuery;
+            $inventoryItemsQuery->where('name', 'LIKE', "%{$searchQuery}%");
         }
         // Paginate the filtered query
         $inventoryItems = $inventoryItemsQuery->paginate(10);
