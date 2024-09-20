@@ -183,12 +183,12 @@ body.inventory-blurred footer {
 
 /* ==================================== inventory update form styles ==================================== */
 
-#image-update{
+#image-preview{
     width:75px;
     height: 75px;
     border-radius: 10px;
 }
 
-#image-update + input{
+#image-preview + input{
     width: 100%;
 }
