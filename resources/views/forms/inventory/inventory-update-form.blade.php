@@ -6,7 +6,7 @@
         <ul>
             <li class="nav-item">
                 <div class="input-group d-flex flex-column justify-center align-items-center">
-                    <img class="mb-3" src="" alt="" id="image-update">
+                    <img class="mb-3" src="" alt="" id="image-preview">
                     <input type="file" class="form-control" id="image" name="image">
                     {{-- <label class="input-group-text" for="inputGroupFile02">Upload</label> --}}
                 </div>
@@ -19,7 +19,7 @@
                     <span role="alert"><strong id="nameError"></strong></span>
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item"> 
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Category</span>
                     <select class="form-control" id="category" name="category">
@@ -119,7 +119,7 @@
                 success: function(response) {
                     // Debugging to ensure response contains correct data
                     // Populate the form fields' placeholders with the response data
-                    $('#inventoryupdateForm #image-update').attr('src', response.image);
+                    $('#inventoryupdateForm #image-preview').attr('src', response.image);
                     $('#inventoryupdateForm #name').attr('value', response.name);
                     $('#inventoryupdateForm #category').val(response.category);
                     $('#inventoryupdateForm #description').attr('value', response.description);
