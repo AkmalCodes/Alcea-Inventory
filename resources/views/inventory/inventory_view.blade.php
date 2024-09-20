@@ -22,7 +22,7 @@
                 <div class="col-12">
                     <div class="container-fluid  px-0 px-md-auto m-0">
                         <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search Inventory"
+                            <input class="form-control me-2" id="inventory-search" type="search" placeholder="Search for item"
                                 aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
@@ -200,8 +200,9 @@
     $(document).ready(function() {
     let filters = {
         category: 'all',  // Default category
-        storageLocation: '', // Placeholder for future storage location filter
-        lowStock: false, // Placeholder for low stock filter
+        storageLocation: '', // Default Placeholder for future storage location filter
+        searchQuery: '',   // Default Placeholder for search input
+        lowStock: false, // Default Placeholder for low stock filter
         page: 1           // Default page
     };
 
@@ -228,6 +229,13 @@
         filters[filterType] = filterValue; // Update the relevant filter
         filters.page = 1;  // Reset to page 1
         loadInventory(filters); // Reload with updated filters
+    });
+
+    // Event listener for search input (real-time search), considered kind of real-time due to 'keyup'
+    $(document).on('keyup', '#inventory-search', function(event) {
+        filters.searchQuery = $(this).val(); // Update the search query in filters
+        filters.page = 1;  // Reset to page 1 when searching
+        loadInventory(filters);  // Reload inventory with search query
     });
 
     // Function to load inventory based on filters
