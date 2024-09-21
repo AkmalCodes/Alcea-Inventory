@@ -14,8 +14,7 @@
             <li class="nav-item">
                 <div class="input-group d-flex ">
                     <span class="input-group-text" id="basic-addon1">Name</span>
-                    <input type="text" class="form-control" id="name" name="name" value="Enter Item Name"
-                    readonly >
+                    <input type="text" class="form-control update-form-readonly" id="name" name="name" value="Enter Item Name" readonly>
                     <span role="alert"><strong id="nameError"></strong></span>
                 </div>
             </li>
@@ -49,8 +48,7 @@
             <li class="nav-item">
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Unit</span>
-                    <input type="text" class="form-control" id="unit" name="unit" value="Enter Unit"
-                     readonly>
+                    <input type="text" class="form-control update-form-readonly" id="unit" name="unit" value="Enter Unit" readonly>
                     <span role="alert"><strong id="unitError"></strong></span>
                 </div>
             </li>
@@ -65,8 +63,7 @@
             <li class="nav-item">
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Storage Location</span>
-                    <input type="text" class="form-control" id="storage_location" name="storage_location"
-                        value="Enter Storage Location"  readonly>
+                    <input type="text" class="form-control update-form-readonly" id="storage_location" name="storage_location" value="Enter Storage Location"  readonly>
                     <span role="alert"><strong id="storageLocationError"></strong></span>
                 </div>
             </li>
@@ -80,16 +77,14 @@
             <li class="nav-item">
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Supplier Name</span>
-                    <input type="text" class="form-control" id="supplier_name" name="supplier_name"
-                        value="Enter Supplier Name"  readonly>
+                    <input type="text" class="form-control update-form-readonly" id="supplier_name" name="supplier_name" value="Enter Supplier Name"  readonly>
                     <span role="alert"><strong id="supplierNameError"></strong></span>
                 </div>
             </li>
             <li class="nav-item">
                 <div class="input-group d-flex">
                     <span class="input-group-text" id="basic-addon1">Supplier Contact</span>
-                    <input type="text" class="form-control" id="supplier_contact" name="supplier_contact"
-                        value="Enter Supplier Contact"  readonly>
+                    <input type="text" class="form-control update-form-readonly" id="supplier_contact" name="supplier_contact" value="Enter Supplier Contact"  readonly>
                     <span role="alert"><strong id="supplierContactError"></strong></span>
                 </div>
             </li>
