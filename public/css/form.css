@@ -109,7 +109,8 @@ body.inventory-blurred footer {
     margin:0.5em 0.5em;
 }
 
-.inventory-update-form ul li:first-child{
+.inventory-update-form ul li:first-child,
+.inventory-add-form ul li:first-child{
     grid-column: span 2 ;
 }
 
@@ -181,8 +182,6 @@ body.inventory-blurred footer {
     text-align: center;
 }
 
-/* ==================================== inventory update form styles ==================================== */
-
 #image-preview{
     width:75px;
     height: 75px;
@@ -191,4 +190,15 @@ body.inventory-blurred footer {
 
 #image-preview + input{
     width: 100%;
+    border-radius: 6px;
+}
+
+#inventoryupdateForm .form-control,
+#inventoryaddForm .form-control{
+    border-bottom-right-radius: 6px !important;
+    border-top-right-radius: 6px !important;
+}
+
+.update-form-readonly{
+    background-color: rgba(243, 243, 243, 0.877);
 }
