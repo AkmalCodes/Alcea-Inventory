@@ -15,7 +15,10 @@ class DashboardController extends Controller
     public function view(Request $request)
     {
         $totalItems = Inventory::count();
-        $lowStockItems = Inventory::whereColumn('quantity', '<', 'reorder_level')->get();
+        $lowStockItems = Inventory::whereColumn('quantity', '<', 'reorder_level')
+            ->orderBy('created_at', 'desc')
+            ->paginate(15 ); // now paginated
+        $lowStockItemsCount = Inventory::whereColumn('quantity', '<', 'reorder_level')->count();
         $recentUpdatedItems = InventoryAction::where('updated_at', '>=', now()->subDays(7))
             ->with('inventory', function ($query) {
                 $query->withTrashed(); // retrieves data that has been soft deleted or in other words delted_at <> NULL
@@ -23,14 +26,19 @@ class DashboardController extends Controller
 
         // If the request is an AJAX call, return the partial view for pagination
         if ($request->ajax()) {
-            $recentUpdatedItemsPagination = view('dashboard.partials.recentupdateitems_pagination', compact('recentUpdatedItems'))->render(); // Custom pagination view
+            $recentUpdatedItemsPagination = view('dashboard.partials.recentupdateitems_pagination', compact('recentUpdatedItems'))->render();
+            $lowStockItemsPagination = view('dashboard.partials.lowstockitems_pagination', compact('lowStockItems'))->render();
+        
             return response()->json([
-                'items' => $recentUpdatedItems->items(), // Just the items' data front end will handle data
-                'pagination_recentupdateitems' => $recentUpdatedItemsPagination // Cast pagination links to string
+                'recent_update_items' => $recentUpdatedItems->items(),
+                'pagination_recentupdateitems' => $recentUpdatedItemsPagination,
+                'low_stock_items' => $lowStockItems->items(),
+                'pagination_lowstockitems' => $lowStockItemsPagination,
             ]);
         }
+        
 
-        return view('dashboard.dashboard', compact('totalItems', 'lowStockItems', 'recentUpdatedItems'));
+        return view('dashboard.dashboard', compact('totalItems', 'lowStockItems', 'recentUpdatedItems','lowStockItemsCount'));
     }
 
 }
