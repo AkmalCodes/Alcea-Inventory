@@ -28,6 +28,8 @@ Route::get('/inventory/get/{id}', [InventoryController::class, 'getItem'])->name
 // ================== Authentication Routes ==================
 Auth::routes();
 
+// ================== Forecast AI Route ==================
+Route::post('/forecast', [ForecastController::class, 'getForecast']);
 
 
 
