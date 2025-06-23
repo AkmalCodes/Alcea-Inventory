@@ -12,7 +12,7 @@
             </div>
             <div class="dashboard-card text-center my-2">
                 <h5>Low Stock Items</h5>
-                <p>{{ $lowStockItems->count() }} items</p>
+                <p>{{ $lowStockItemsCount }} items</p>
             </div>
             <div class="dashboard-card text-center my-2">
                 <h5>Recently Updated</h5>
@@ -22,7 +22,7 @@
         <div class="dashboard-table-container col">
             <div class="card">
                 <div class="card-header text-center">
-                    <h5>Low Stock Items <strong style="color:rgb(238, 65, 43);">{{ $lowStockItems->count() }}</strong></h5>
+                    <h5>Low Stock Items <strong style="color:rgb(238, 65, 43);">{{ $lowStockItemsCount }}</strong></h5>
                 </div>
                 <div class="card-body">
                     <table id="lowstockitems" class="table table-borderless">
@@ -43,10 +43,13 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div id="pagination-lowstockitems" class="d-flex justify-content-end align-items-center mt-1 mb-1">
+                        @include('dashboard.partials.lowstockitems_pagination')
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="dashboard-table-container col mt-4">
+        <!-- <div class="dashboard-table-container col mt-4">
             <div class="card">
                 <div class="card-header text-center">
                     <h5>Recently Updated Items <strong style="color:rgb(238, 65, 43);">{{ $recentUpdatedItems->total() }}</strong></h5>
@@ -78,7 +81,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -92,23 +95,22 @@
             url: '/dashboard?page=' + page, // Correct route for pagination
             type: 'GET',
             success: function(response) {
-                var tableBody = $('#recentlyupdateditems tbody');
+                var tableBody = $('#lowstockitems tbody');
                 tableBody.empty(); // Clear the current rows
 
                 // Loop through the items and generate new table rows
-                $.each(response.items, function(index, item) {
+                $.each(response.low_stock_items, function(index, item) {
                     var row = '<tr>';
-                    row += '<td>' + item.inventory.name + ' <strong>[' + item.inventory.supplier_name + ']</strong></td>';
-                    row += '<td>' + item.performed_by + '</td>';
-                    row += '<td>' + item.action_type + '</td>';
-                    row += '<td>' + new Date(item.updated_at).toLocaleDateString() + '</td>';
+                    row += '<td>' + item.name + ' <strong>[ ' + item.supplier_name + ' ]</strong></td>';
+                    row += '<td>' + item.quantity + '</td>';
+                    row += '<td>' + item.reorder_level + '</td>';
                     row += '</tr>';
 
                     tableBody.append(row); // Append each row to the table
                 });
 
                 // Update pagination
-                $('#pagination-links').html(response.pagination_recentupdateitems);
+                $('#pagination-lowstockitems').html(response.pagination_lowstockitems);
             },
             error: function() {
                 alert('Error loading data.');

@@ -552,6 +552,11 @@ li{
     height: fit-content;
 }
 
+#pagination-lowstockitems>nav>ul{
+    margin:0;
+    height: fit-content;
+}
+
 .page-link-custom {
     text-decoration: none !important; /* Remove underline */
     border:none !important;
