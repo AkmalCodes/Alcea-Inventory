@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ForecastController;
+
 
 Route::get('/', function () {
     return view('home');
@@ -29,8 +31,7 @@ Route::get('/inventory/get/{id}', [InventoryController::class, 'getItem'])->name
 Auth::routes();
 
 // ================== Forecast AI Route ==================
-Route::post('/forecast', [ForecastController::class, 'getForecast']);
-
+Route::get('/forecast-results', [DashboardController::class, 'getForecastFromAPI']);
 
 
 
