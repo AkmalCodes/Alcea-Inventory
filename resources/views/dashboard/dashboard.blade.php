@@ -29,7 +29,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Quantity</th>
+                                <th>Quantity</th>   
                                 <th>Reorder Level</th>
                             </tr>
                         </thead>
@@ -46,6 +46,35 @@
                     <div id="pagination-lowstockitems" class="d-flex justify-content-end align-items-center mt-1 mb-1">
                         @include('dashboard.partials.lowstockitems_pagination')
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-table-container col mt-4">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h5>Forecasted Inventory (Next 3 Months)</h5>
+                </div>
+                <div class="card-body">
+                    <table id="forecasteditems" class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Next Month</th>
+                                <th>Month +2</th>
+                                <th>Month +3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($forecastedItems as $item)
+                                <tr>
+                                    <td>{{ $item['product_id'] }}</td>
+                                    <td>{{ $item['forecast'][0] ?? '-' }}</td>
+                                    <td>{{ $item['forecast'][1] ?? '-' }}</td>
+                                    <td>{{ $item['forecast'][2] ?? '-' }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
