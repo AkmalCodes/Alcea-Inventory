@@ -31,12 +31,17 @@ class ForecastController extends Controller
             ];
         })->toArray();
 
+        // dd($dataToSend);
+
         // Replace this with your actual deployed Colab API endpoint
-        $response = Http::post('https://18a0-34-31-169-112.ngrok-free.app/predict', [
+        $response = Http::post('https://320e-34-44-11-182.ngrok-free.app/predict', [
             'data' => $dataToSend
         ]);
 
         $forecastResults = $response->json();
+
+        //insert db query here for forecasts table
+
 
         // You can return this as JSON or pass to a Blade view
         return $forecastResults;

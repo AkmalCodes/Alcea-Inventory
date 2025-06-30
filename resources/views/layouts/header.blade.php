@@ -10,7 +10,7 @@
             @endauth --}}
             <div class="top-nav-menu-middle col-6 col-md-4 mt-3 mt-md-0">
                 <div class="container-fluid">
-                    <h3 class="text-left m-0" style="color:rgba(7, 92, 62);">alcea coffee &#169</h3>
+                    <h3 class="text-left m-0" style="color:rgba(7, 92, 62);">alcea Inventory &#169</h3>
                 </div>
             </div>
             <div class="top-nav-menu-right col-6 col-md-4 mt-3 mt-md-0">

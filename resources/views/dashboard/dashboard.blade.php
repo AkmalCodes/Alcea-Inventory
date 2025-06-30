@@ -55,13 +55,13 @@
                     <h5>Forecasted Inventory (Next 3 Months)</h5>
                 </div>
                 <div class="card-body">
-                    <table id="forecasteditems" class="table table-borderless">
+                    <table id="forecast-table" class="table table-borderless">
                         <thead>
                             <tr>
                                 <th>Product Name</th>
-                                <th>Next Month</th>
-                                <th>Month +2</th>
-                                <th>Month +3</th>
+                                <th>{{ $month1 ?? 'Next Month' }}</th>
+                                <th>{{ $month2 ?? '2 Months Ahead' }}</th>
+                                <th>{{ $month3 ?? '3 Months Ahead' }}</th>
                             </tr>
                         </thead>
                         <tbody>
